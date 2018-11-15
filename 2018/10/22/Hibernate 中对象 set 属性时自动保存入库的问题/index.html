@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="背景在某个项目中，通过 Heibernate 查出某个对象后，对属性进行了 set 操作，并没有进行 update 操作，但是在数据中自动保存了。 显然这并不是我想要的，我只是想 set 一下属性，在前端显示，并不想入库，但是 Heibernate 自动保存了。 12345// 查出对象，原来的 name 为 user1User user = userManager.findOne(1);// 将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate 中对象 set 属性时自动保存入库的问题">
+<meta property="og:url" content="http://yoursite.com/2018/10/22/Hibernate 中对象 set 属性时自动保存入库的问题/index.html">
+<meta property="og:site_name" content="yujunyi的博客">
+<meta property="og:description" content="背景在某个项目中，通过 Heibernate 查出某个对象后，对属性进行了 set 操作，并没有进行 update 操作，但是在数据中自动保存了。 显然这并不是我想要的，我只是想 set 一下属性，在前端显示，并不想入库，但是 Heibernate 自动保存了。 12345// 查出对象，原来的 name 为 user1User user = userManager.findOne(1);// 将">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic.yujunyi.com/18-10-19/32894097.jpg">
+<meta property="og:updated_time" content="2018-11-15T08:04:16.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate 中对象 set 属性时自动保存入库的问题">
+<meta name="twitter:description" content="背景在某个项目中，通过 Heibernate 查出某个对象后，对属性进行了 set 操作，并没有进行 update 操作，但是在数据中自动保存了。 显然这并不是我想要的，我只是想 set 一下属性，在前端显示，并不想入库，但是 Heibernate 自动保存了。 12345// 查出对象，原来的 name 为 user1User user = userManager.findOne(1);// 将">
+<meta name="twitter:image" content="https://pic.yujunyi.com/18-10-19/32894097.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/22/Hibernate 中对象 set 属性时自动保存入库的问题/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hibernate 中对象 set 属性时自动保存入库的问题 | yujunyi的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yujunyi的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/22/Hibernate 中对象 set 属性时自动保存入库的问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yujunyi">
+      <meta itemprop="description" content="yujunyi的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yujunyi的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hibernate 中对象 set 属性时自动保存入库的问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-22 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-22T00:00:00+08:00">2018-10-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-15 16:04:16" itemprop="dateModified" datetime="2018-11-15T16:04:16+08:00">2018-11-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring-mvc/" itemprop="url" rel="index"><span itemprop="name">spring mvc</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在某个项目中，通过 Heibernate 查出某个对象后，对属性进行了 set 操作，并没有进行 update 操作，但是在数据中自动保存了。</p>
+<p>显然这并不是我想要的，我只是想 set 一下属性，在前端显示，并不想入库，但是 Heibernate 自动保存了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查出对象，原来的 name 为 user1</span></span><br><span class="line">User user = userManager.findOne(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 将userName 设置为 user2 ，用于前端显示，并没有保存</span></span><br><span class="line">user.setName(<span class="string">"user2"</span>);</span><br><span class="line"><span class="comment">// heibernate 自动进行了保存，库中的 name 为 user2</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Heibernate 中对象分为以下几种状态：</p>
+<p><img src="https://pic.yujunyi.com/18-10-19/32894097.jpg" alt=""></p>
+<h4 id="瞬时状态："><a href="#瞬时状态：" class="headerlink" title="瞬时状态："></a>瞬时状态：</h4><p>实际上就是 new 了一个普通的 JavaBean 对象。</p>
+<h4 id="托管状态："><a href="#托管状态：" class="headerlink" title="托管状态："></a>托管状态：</h4><ul>
+<li><p>当瞬时对象调用了管理器的 persist() 后，即可将一般的 JavaBean 做为了持久 Bean，该 Bean 的任何属性改动都会牵涉到数据库记录的改动。</p>
+</li>
+<li><p>一旦该记录 flush 到数据库之后，并且事务提交了，那么此对象不在持久化上下文中，即：变为了游离（没人管的孩子）状态了。在游离状态的时候调用更新、刷新方法后，游离状态对象就变为了在持久化上下文的托管状态了。</p>
+</li>
+<li><p>通过管理器的 find 方法，将实体从数据库查询出来后，该实体也就变为了托管形态。</p>
+</li>
+</ul>
+<h4 id="持久化状态："><a href="#持久化状态：" class="headerlink" title="持久化状态："></a>持久化状态：</h4><p>当处在托管状态的实体 Bean 被管理器 flush 了，那么就在极短暂的时间进入了持久化状态，事务提交之后，立刻变为了游离状态。您可以把持久化状态当做实实在在的数据库记录。</p>
+<h4 id="游离状态："><a href="#游离状态：" class="headerlink" title="游离状态："></a>游离状态：</h4><p>游离状态就是提交到数据库后，事务 commit 后实体的状态，因为事务已经提交了，此时实体的属性任你如何改变，也不会同步到数据库，因为游离是没人管的孩子，不在持久化上下文中。</p>
+<h4 id="销毁对象："><a href="#销毁对象：" class="headerlink" title="销毁对象："></a>销毁对象：</h4><p>一般要删除一个持久化对象的时候都是先 find 出来，之后调用 remove 方法删之，此时这个对象就是销毁对象，实际上就是瞬时对象的另一种形态罢了。</p>
+<p><strong>根据上面的各种状态，可以得知。通过 find 查出某个对象后，就进入了托管状态，此时对对象的任何属性改动，都会自动保存到数据库中。</strong></p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ol>
+<li><strong>通过 new 一个新的对象出来进行操作，这个新的对象是瞬时状态，不会自动保存。</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查出对象</span></span><br><span class="line">User user = userManager.findOne(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// new 一个新的对象</span></span><br><span class="line">User newUser = <span class="keyword">new</span> User();</span><br><span class="line"><span class="comment">// 将需要用到的属性赋予新的对象，对于前端显示</span></span><br><span class="line">newUser.setAge(user.getAge());</span><br><span class="line">newUser.setName(<span class="string">"user2"</span>);</span><br><span class="line"><span class="comment">// 不要对 newUser 进行保存即可。也不要改变 user 的属性</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p><strong>在 find 查出的对象 set 属性前，将其状态改为游离状态</strong>。这样的话会用到 session 的几个方法：close、clear、evict。</p>
+<ul>
+<li><p>close 方法：关闭 session 这样这个对象肯定是游离态了，因为 session 已经关闭了，但是往往我们实际的开发过程中，session 在后面是要用的到的，所以这个方法可行，但是不一定用得上，分清具体的情况。</p>
+</li>
+<li><p>clear 方法：将 session 中的所有的对象全部清除出缓存，这个方式有点劳师动众，不过 session 清除了全部的对象之后自然就会变为游离态了，这样做不是很好吧我感觉。</p>
+</li>
+<li><strong>evict 方法：将某一个对象清除出缓存 session，这个方法是很好的实现方式，推荐使用。调用的时候是这样的，session.evict(Object obj) 这样就可以了。</strong></li>
+</ul>
+<p>这边推荐使用 evict 方法，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PersistenceContext</span></span><br><span class="line"><span class="keyword">private</span> EntityManager entityManager;</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 session</span></span><br><span class="line">HibernateEntityManager hEntityManager = (HibernateEntityManager)entityManager;</span><br><span class="line">Session session = hEntityManager.getSession();</span><br><span class="line"><span class="comment">// 查出对象，原来的 name 为 user1</span></span><br><span class="line">User user = userManager.findOne(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 将对象清除出缓存 session，这样后面对属性的改变就不会自动保存</span></span><br><span class="line">session.evict(user);</span><br><span class="line"><span class="comment">// 将userName 设置为 user2 ，用于前端显示</span></span><br><span class="line">user.setName(<span class="string">"user2"</span>);</span><br><span class="line"><span class="comment">// 由于清除出了 session，heibernate 不会对这个对象进行保存，库中的 name 仍为 user1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过 Hibernate 查询出来的对象，改变其属性后，Hibernate 会对其自动保存入库。</p>
+<p>如果不需要使用这个功能，可以通过 new 一个新的对象来进行操作，或者将对象改成游离态。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/18/kettle 教程（四）：自定义 Java 代码/" rel="next" title="kettle 教程（四）：自定义 Java 代码">
+                <i class="fa fa-chevron-left"></i> kettle 教程（四）：自定义 Java 代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/02/回溯算法/" rel="prev" title="回溯算法">
+                回溯算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yujunyi</p>
+              <p class="site-description motion-element" itemprop="description">yujunyi的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#瞬时状态："><span class="nav-number">2.1.</span> <span class="nav-text">瞬时状态：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#托管状态："><span class="nav-number">2.2.</span> <span class="nav-text">托管状态：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#持久化状态："><span class="nav-number">2.3.</span> <span class="nav-text">持久化状态：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#游离状态："><span class="nav-number">2.4.</span> <span class="nav-text">游离状态：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#销毁对象："><span class="nav-number">2.5.</span> <span class="nav-text">销毁对象：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yujunyi</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

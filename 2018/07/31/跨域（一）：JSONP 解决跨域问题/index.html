@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.``` 。12345678910111213141">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域（一）：JSONP 解决跨域问题">
+<meta property="og:url" content="http://yoursite.com/2018/07/31/跨域（一）：JSONP 解决跨域问题/index.html">
+<meta property="og:site_name" content="yujunyi的博客">
+<meta property="og:description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.``` 。12345678910111213141">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic.yujunyi.com/18-7-31/95504587.jpg">
+<meta property="og:updated_time" content="2018-11-15T08:10:12.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨域（一）：JSONP 解决跨域问题">
+<meta name="twitter:description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.``` 。12345678910111213141">
+<meta name="twitter:image" content="https://pic.yujunyi.com/18-7-31/95504587.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/31/跨域（一）：JSONP 解决跨域问题/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>跨域（一）：JSONP 解决跨域问题 | yujunyi的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yujunyi的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/跨域（一）：JSONP 解决跨域问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yujunyi">
+      <meta itemprop="description" content="yujunyi的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yujunyi的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">跨域（一）：JSONP 解决跨域问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-15 16:10:12" itemprop="dateModified" datetime="2018-11-15T16:10:12+08:00">2018-11-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring-mvc/" itemprop="url" rel="index"><span itemprop="name">spring mvc</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p><strong>协议、域名、端口都相同才算同域，否则就是跨域。</strong></p>
+<p>浏览器为了安全考虑（<a target="_blank" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略</a>），不允许 axaj 跨域获取数据。浏览器会报错 <figure class="highlight plain"><figcaption><span>has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.``` 。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但是可以跨域获取文件内容，例如 script 标签、 img 标签可以跨域使用，利用这一点，就可以用 JSONP 进行跨域请求，解决跨域问题。</span><br><span class="line"></span><br><span class="line">### JSONP</span><br><span class="line"></span><br><span class="line">JSONP ( JSON with Padding ) 是 json 的一种&quot;使用模式&quot;，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。 </span><br><span class="line"></span><br><span class="line">JSONP 由两部分组成：回调函数+数据 。</span><br><span class="line"></span><br><span class="line">**JSONP 的原理就是动态添加一个 script 标签，而 script 标签的 src 属性是没有跨域的限制的。**</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">### 后台代码</span><br><span class="line"></span><br><span class="line">后台需要用回调函数名称包裹返回数据，这样，返回数据就作为回调函数的参数传回去了。</span><br><span class="line"></span><br><span class="line">传统方法：</span><br><span class="line"></span><br><span class="line">``` java</span><br><span class="line">@RequestMapping(&quot;/test&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String test(String callback) &#123;</span><br><span class="line">    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(&quot;msg&quot;, &quot;hello world!&quot;);</span><br><span class="line">    return callback + &quot;(&quot; + JSON.toJSON(map) + &quot;)&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>spring 4.1 后新特性 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">test</span><span class="params">(String callback)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">"msg"</span>, <span class="string">"hello world!"</span>);</span><br><span class="line">    MappingJacksonValue mappingJacksonValue = <span class="keyword">new</span> MappingJacksonValue(JSON.toJSON(map));</span><br><span class="line">    mappingJacksonValue.setJsonpFunction(callback);</span><br><span class="line">    <span class="keyword">return</span> mappingJacksonValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="前端调用"><a href="#前端调用" class="headerlink" title="前端调用"></a>前端调用</h3><h4 id="1-利用-script-标签调用"><a href="#1-利用-script-标签调用" class="headerlink" title="1.利用 script 标签调用"></a>1.利用 script 标签调用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">jsonpCallback</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">" src="</span>http:<span class="comment">//192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do?callback=jsonpCallback"&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>客户端注册一个 callback ，这里是 jsonpCallback ，然后把 callback 的名字传给服务器，服务端得到这个函数名之后，要用这样的方法 <figure class="highlight plain"><figcaption><span>``` 包裹要输出的 json 内容。 此时服务器生成的json数据才能被客户端正确接收。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line"></span><br><span class="line">``` json</span><br><span class="line">&#123;msg: &quot;hello world!&quot;&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-jQuery-的实现（普通-ajax-方式）"><a href="#2-jQuery-的实现（普通-ajax-方式）" class="headerlink" title="2.jQuery 的实现（普通 ajax 方式）"></a>2.jQuery 的实现（普通 ajax 方式）</h4><p>原理是一样的，只不过我们不需要手动的插入 script 标签以及定义回调函数。<br>jquery 会自动生成一个全局函数来替换 callback=? 中的问号，之后获取到数据后又会自动销毁，实际上就是起一个临时代理函数的作用。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type:<span class="string">'get'</span>,</span><br><span class="line">            dataType: <span class="string">'jsonp'</span>,</span><br><span class="line">            url: <span class="string">'http://192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>需要注意下，jsonp 只能用 get 方式去提交。</strong></p>
+<p>运行结果：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;msg: "hello world!"&#125;</span><br></pre></td></tr></table></figure>
+<p>我们调试下后台代码，可以看到，jquery 会自动生成一个函数，去替换 callback=? 中的问号。</p>
+<p><img src="https://pic.yujunyi.com/18-7-31/95504587.jpg" alt=""></p>
+<p>当然，我们也可以自定义 callback 的参数名和回调函数的名称。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type:<span class="string">'get'</span>,</span><br><span class="line">            dataType: <span class="string">'jsonp'</span>,</span><br><span class="line">            jsonp: <span class="string">"myCallBack"</span>, <span class="comment">// 指定 callback 的参数名</span></span><br><span class="line">            jsonpCallback: <span class="string">"showData"</span>,  <span class="comment">// 指定回调函数的名称</span></span><br><span class="line">            url: <span class="string">'http://192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"success"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showData</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时候，后台方法的参数就要稍微修改下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">test</span><span class="params">(String myCallBack)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">"msg"</span>, <span class="string">"hello world!"</span>);</span><br><span class="line">    MappingJacksonValue mappingJacksonValue = <span class="keyword">new</span> MappingJacksonValue(JSON.toJSON(map));</span><br><span class="line">    mappingJacksonValue.setJsonpFunction(myCallBack);</span><br><span class="line">    <span class="keyword">return</span> mappingJacksonValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;msg: "hello world!"&#125;</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+<h4 id="3-jQuery-的实现（-getJSON-方式）"><a href="#3-jQuery-的实现（-getJSON-方式）" class="headerlink" title="3.jQuery 的实现（ $.getJSON 方式）"></a>3.jQuery 的实现（ $.getJSON 方式）</h4><p><strong>$.getJSON 方法会自动判断是否跨域</strong>，不跨域的话，就调用普通的 ajax 方法；跨域的话，则会以异步加载 js 文件的形式来调用 jsonp 的回调函数。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"http://192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do?callback=?"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>需要注意下，参数后面必须带上 callback=? 。</strong></p>
+<h3 id="JSONP-的弊端："><a href="#JSONP-的弊端：" class="headerlink" title="JSONP 的弊端："></a>JSONP 的弊端：</h3><ul>
+<li>要对服务器的代码进行改动</li>
+<li>只支持 GET 方法（原理是动态创建 script 来进行请求的）</li>
+<li>发送的不是 XMLHttpRequest 请求（ XMLHttpRequest 请求有很多好用的特性）</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一句话就是利用 script 标签绕过同源策略，获得一个类似这样的数据，callback 是页面存在的回调方法，参数就是想得到的 json。 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callback(&#123;"msg": "hello world!"&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/26/【转】数据库两大神器【索引和锁】/" rel="next" title="【转】数据库两大神器【索引和锁】">
+                <i class="fa fa-chevron-left"></i> 【转】数据库两大神器【索引和锁】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/31/跨域（三）：代理解决跨域问题/" rel="prev" title="跨域（三）：代理解决跨域问题">
+                跨域（三）：代理解决跨域问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yujunyi</p>
+              <p class="site-description motion-element" itemprop="description">yujunyi的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域"><span class="nav-number">1.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端调用"><span class="nav-number">2.</span> <span class="nav-text">前端调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-利用-script-标签调用"><span class="nav-number">2.1.</span> <span class="nav-text">1.利用 script 标签调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-jQuery-的实现（普通-ajax-方式）"><span class="nav-number">2.2.</span> <span class="nav-text">2.jQuery 的实现（普通 ajax 方式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-jQuery-的实现（-getJSON-方式）"><span class="nav-number">2.3.</span> <span class="nav-text">3.jQuery 的实现（ $.getJSON 方式）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP-的弊端："><span class="nav-number">3.</span> <span class="nav-text">JSONP 的弊端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yujunyi</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
