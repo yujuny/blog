@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/跨域（二）：CORS 解决跨域问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/spring mvc 统一异常处理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yujunyi">
@@ -337,7 +337,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/07/31/跨域（二）：CORS 解决跨域问题/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">跨域（二）：CORS 解决跨域问题</a>
+                <a href="/2018/08/15/spring mvc 统一异常处理/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">spring mvc 统一异常处理</a>
               
             
           </h1>
@@ -362,25 +362,9 @@
                 
               
 
-              <time title="创建时间：2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+              <time title="创建时间：2018-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-15T00:00:00+08:00">2018-08-15</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:09:46" itemprop="dateModified" datetime="2018-11-15T16:09:46+08:00">2018-11-15</time>
-              
             
           </span>
 
@@ -431,12 +415,20 @@
 
       
         
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>框架的强大之处就在于把很多需要重复编写的代码剥离出来，形成核心的处理方式。 </p>
+<p>在异常的处理这块，你不需要再有过多的 try-catch 语句，只需要把异常抛给框架就行了，框架帮你处理！ </p>
+<p>在 spring mvc 中的统一异常处理有3种，本文拿最简单的一种来演示 。</p>
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>为了<strong>更精确的定位异常，区分异常种类</strong>，我们会用到自定义异常。</p>
+<p>考虑下如下场景：系统需要提供一个 API，供其它系统查看消息，服务器之间采用 json 交互，这时候我们需要自定一个异常，用来表示逻辑受理失败（比如对方未传必填参数）。</p>
+          <!--noindex-->
           
-            <p>在上一篇 <a target="_blank" href="http://www.yujunyi.com/java/spring-mvc/466.html">文章</a> 中，讲到了利用 JSONP 来解决跨域问题。</p>
-<p>由于 JSONP 只支持 <figure class="highlight plain"><figcaption><span>请求 ，并且前后端代码都需要改动，因此推荐利用 CORS 来解决跨域问题。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### CORS 简介</span><br><span class="line"></span><br><span class="line">CORS 是一个 W3C 标准，全称是“跨域资源共享&quot;（Cross-origin resource sharing）。</span><br><span class="line"></span><br><span class="line">它允许浏览器向跨源服务器，发出 XMLHttpRequest 请求，从而克服了 AJAX 只能同源使用的限制。</span><br><span class="line"></span><br><span class="line">更多的介绍可以看阮一峰老师的 &lt;a target=&quot;_blank&quot; href=&quot;http://www.ruanyifeng.com/blog/2016/04/cors.html&quot;&gt;博文&lt;/a&gt;。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 用法</span><br><span class="line"></span><br><span class="line">#### 1.传统java代码</span><br><span class="line"></span><br><span class="line">在 Java 中，我们写下面这个过滤器，就可以完全解决跨域的问题了。</span><br><span class="line"></span><br><span class="line">``` java</span><br><span class="line">import javax.servlet.*;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">public class CrosFilter implements Filter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)</span><br><span class="line">            throws IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">        HttpServletResponse res = (HttpServletResponse) response;</span><br><span class="line">        HttpServletRequest req = (HttpServletRequest) request;</span><br><span class="line"></span><br><span class="line">        //带cookie的时候，origin必须是全匹配，不能使用*</span><br><span class="line">        String origin = req.getHeader(&quot;Origin&quot;);</span><br><span class="line">        if (!org.springframework.util.StringUtils.isEmpty(origin)) &#123;</span><br><span class="line">            res.addHeader(&quot;Access-Control-Allow-Origin&quot;, origin);</span><br><span class="line">        &#125;</span><br><span class="line">        res.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;*&quot;);</span><br><span class="line"></span><br><span class="line">        // 支持所有自定义头和预检命令(非简单请求会有预检命令)</span><br><span class="line">        String headers = req.getHeader(&quot;Access-Control-Request-Headers&quot;);</span><br><span class="line">        if (!org.springframework.util.StringUtils.isEmpty(headers)) &#123;</span><br><span class="line">            res.addHeader(&quot;Access-Control-Allow-Headers&quot;, headers);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        res.addHeader(&quot;Access-Control-Max-Age&quot;, &quot;3600&quot;);</span><br><span class="line">        // enable cookie</span><br><span class="line">        res.addHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-spring-框架解决"><a href="#2-spring-框架解决" class="headerlink" title="2.spring 框架解决"></a>2.spring 框架解决</h4><p><strong>如果使用的是 Spring 框架的话，那就只需要一个注解就能够解决跨域的问题了</strong>：<figure class="highlight plain"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">``` java</span><br><span class="line">@RequestMapping(&quot;/test&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">@CrossOrigin</span><br><span class="line">public String test() &#123;</span><br><span class="line">    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(&quot;msg&quot;, &quot;hello world!&quot;);</span><br><span class="line">    return JSON.toJSONString(map);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/15/spring mvc 统一异常处理/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>
@@ -539,22 +531,6 @@
               <time title="创建时间：2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:09:21" itemprop="dateModified" datetime="2018-11-15T16:09:21+08:00">2018-11-15</time>
-              
             
           </span>
 
@@ -720,21 +696,172 @@
             
 
             
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/spring-mvc/" itemprop="url" rel="index"><span itemprop="name">spring mvc</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p><strong>协议、域名、端口都相同才算同域，否则就是跨域。</strong></p>
+<p>浏览器为了安全考虑（<a target="_blank" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略</a>），不允许 axaj 跨域获取数据。浏览器会报错 <code>xxx has been blocked by CORS policy: No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource.</code> 。</p>
+<p>但是可以跨域获取文件内容，例如 script 标签、 img 标签可以跨域使用，利用这一点，就可以用 JSONP 进行跨域请求，解决跨域问题。</p>
+<h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>JSONP ( JSON with Padding ) 是 json 的一种”使用模式”，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。 </p>
+<p>JSONP 由两部分组成：回调函数+数据 。</p>
+<p><strong>JSONP 的原理就是动态添加一个 script 标签，而 script 标签的 src 属性是没有跨域的限制的。</strong></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/07/31/跨域（一）：JSONP 解决跨域问题/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/跨域（二）：CORS 解决跨域问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yujunyi">
+      <meta itemprop="description" content="yujunyi的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yujunyi的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/07/31/跨域（二）：CORS 解决跨域问题/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">跨域（二）：CORS 解决跨域问题</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:10:12" itemprop="dateModified" datetime="2018-11-15T16:10:12+08:00">2018-11-15</time>
               
+
+              <time title="创建时间：2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+            
+
             
           </span>
 
@@ -785,38 +912,20 @@
 
       
         
+          <p>在上一篇 <a target="_blank" href="http://www.yujunyi.com/java/spring-mvc/466.html">文章</a> 中，讲到了利用 JSONP 来解决跨域问题。</p>
+<p>由于 JSONP 只支持 <code>GET</code> 请求 ，并且前后端代码都需要改动，因此推荐利用 CORS 来解决跨域问题。</p>
+<h3 id="CORS-简介"><a href="#CORS-简介" class="headerlink" title="CORS 简介"></a>CORS 简介</h3><p>CORS 是一个 W3C 标准，全称是“跨域资源共享”（Cross-origin resource sharing）。</p>
+<p>它允许浏览器向跨源服务器，发出 XMLHttpRequest 请求，从而克服了 AJAX 只能同源使用的限制。</p>
+<p>更多的介绍可以看阮一峰老师的 <a target="_blank" href="http://www.ruanyifeng.com/blog/2016/04/cors.html">博文</a>。</p>
+          <!--noindex-->
           
-            <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p><strong>协议、域名、端口都相同才算同域，否则就是跨域。</strong></p>
-<p>浏览器为了安全考虑（<a target="_blank" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略</a>），不允许 axaj 跨域获取数据。浏览器会报错 <figure class="highlight plain"><figcaption><span>has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.``` 。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但是可以跨域获取文件内容，例如 script 标签、 img 标签可以跨域使用，利用这一点，就可以用 JSONP 进行跨域请求，解决跨域问题。</span><br><span class="line"></span><br><span class="line">### JSONP</span><br><span class="line"></span><br><span class="line">JSONP ( JSON with Padding ) 是 json 的一种&quot;使用模式&quot;，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。 </span><br><span class="line"></span><br><span class="line">JSONP 由两部分组成：回调函数+数据 。</span><br><span class="line"></span><br><span class="line">**JSONP 的原理就是动态添加一个 script 标签，而 script 标签的 src 属性是没有跨域的限制的。**</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">### 后台代码</span><br><span class="line"></span><br><span class="line">后台需要用回调函数名称包裹返回数据，这样，返回数据就作为回调函数的参数传回去了。</span><br><span class="line"></span><br><span class="line">传统方法：</span><br><span class="line"></span><br><span class="line">``` java</span><br><span class="line">@RequestMapping(&quot;/test&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String test(String callback) &#123;</span><br><span class="line">    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(&quot;msg&quot;, &quot;hello world!&quot;);</span><br><span class="line">    return callback + &quot;(&quot; + JSON.toJSON(map) + &quot;)&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>spring 4.1 后新特性 ：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">test</span><span class="params">(String callback)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">"msg"</span>, <span class="string">"hello world!"</span>);</span><br><span class="line">    MappingJacksonValue mappingJacksonValue = <span class="keyword">new</span> MappingJacksonValue(JSON.toJSON(map));</span><br><span class="line">    mappingJacksonValue.setJsonpFunction(callback);</span><br><span class="line">    <span class="keyword">return</span> mappingJacksonValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="前端调用"><a href="#前端调用" class="headerlink" title="前端调用"></a>前端调用</h3><h4 id="1-利用-script-标签调用"><a href="#1-利用-script-标签调用" class="headerlink" title="1.利用 script 标签调用"></a>1.利用 script 标签调用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">jsonpCallback</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">" src="</span>http:<span class="comment">//192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do?callback=jsonpCallback"&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>客户端注册一个 callback ，这里是 jsonpCallback ，然后把 callback 的名字传给服务器，服务端得到这个函数名之后，要用这样的方法 <figure class="highlight plain"><figcaption><span>``` 包裹要输出的 json 内容。 此时服务器生成的json数据才能被客户端正确接收。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line"></span><br><span class="line">``` json</span><br><span class="line">&#123;msg: &quot;hello world!&quot;&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-jQuery-的实现（普通-ajax-方式）"><a href="#2-jQuery-的实现（普通-ajax-方式）" class="headerlink" title="2.jQuery 的实现（普通 ajax 方式）"></a>2.jQuery 的实现（普通 ajax 方式）</h4><p>原理是一样的，只不过我们不需要手动的插入 script 标签以及定义回调函数。<br>jquery 会自动生成一个全局函数来替换 callback=? 中的问号，之后获取到数据后又会自动销毁，实际上就是起一个临时代理函数的作用。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type:<span class="string">'get'</span>,</span><br><span class="line">            dataType: <span class="string">'jsonp'</span>,</span><br><span class="line">            url: <span class="string">'http://192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>需要注意下，jsonp 只能用 get 方式去提交。</strong></p>
-<p>运行结果：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;msg: "hello world!"&#125;</span><br></pre></td></tr></table></figure>
-<p>我们调试下后台代码，可以看到，jquery 会自动生成一个函数，去替换 callback=? 中的问号。</p>
-<p><img src="https://pic.yujunyi.com/18-7-31/95504587.jpg" alt=""></p>
-<p>当然，我们也可以自定义 callback 的参数名和回调函数的名称。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type:<span class="string">'get'</span>,</span><br><span class="line">            dataType: <span class="string">'jsonp'</span>,</span><br><span class="line">            jsonp: <span class="string">"myCallBack"</span>, <span class="comment">// 指定 callback 的参数名</span></span><br><span class="line">            jsonpCallback: <span class="string">"showData"</span>,  <span class="comment">// 指定回调函数的名称</span></span><br><span class="line">            url: <span class="string">'http://192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"success"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showData</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这时候，后台方法的参数就要稍微修改下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">test</span><span class="params">(String myCallBack)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">"msg"</span>, <span class="string">"hello world!"</span>);</span><br><span class="line">    MappingJacksonValue mappingJacksonValue = <span class="keyword">new</span> MappingJacksonValue(JSON.toJSON(map));</span><br><span class="line">    mappingJacksonValue.setJsonpFunction(myCallBack);</span><br><span class="line">    <span class="keyword">return</span> mappingJacksonValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;msg: "hello world!"&#125;</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
-<h4 id="3-jQuery-的实现（-getJSON-方式）"><a href="#3-jQuery-的实现（-getJSON-方式）" class="headerlink" title="3.jQuery 的实现（ $.getJSON 方式）"></a>3.jQuery 的实现（ $.getJSON 方式）</h4><p><strong>$.getJSON 方法会自动判断是否跨域</strong>，不跨域的话，就调用普通的 ajax 方法；跨域的话，则会以异步加载 js 文件的形式来调用 jsonp 的回调函数。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"http://192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do?callback=?"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>需要注意下，参数后面必须带上 callback=? 。</strong></p>
-<h3 id="JSONP-的弊端："><a href="#JSONP-的弊端：" class="headerlink" title="JSONP 的弊端："></a>JSONP 的弊端：</h3><ul>
-<li>要对服务器的代码进行改动</li>
-<li>只支持 GET 方法（原理是动态创建 script 来进行请求的）</li>
-<li>发送的不是 XMLHttpRequest 请求（ XMLHttpRequest 请求有很多好用的特性）</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一句话就是利用 script 标签绕过同源策略，获得一个类似这样的数据，callback 是页面存在的回调方法，参数就是想得到的 json。 </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callback(&#123;"msg": "hello world!"&#125;)</span><br></pre></td></tr></table></figure>
-
-          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/07/31/跨域（二）：CORS 解决跨域问题/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>
@@ -919,22 +1028,6 @@
               <time title="创建时间：2018-07-26 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-26T00:00:00+08:00">2018-07-26</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:10:35" itemprop="dateModified" datetime="2018-11-15T16:10:35+08:00">2018-11-15</time>
-              
             
           </span>
 
@@ -1106,22 +1199,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:11:02" itemprop="dateModified" datetime="2018-11-15T16:11:02+08:00">2018-11-15</time>
-              
-            
           </span>
 
           
@@ -1284,22 +1361,6 @@
               <time title="创建时间：2018-07-19 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-19T00:00:00+08:00">2018-07-19</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:11:25" itemprop="dateModified" datetime="2018-11-15T16:11:25+08:00">2018-11-15</time>
-              
             
           </span>
 
@@ -1464,22 +1525,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:12:14" itemprop="dateModified" datetime="2018-11-15T16:12:14+08:00">2018-11-15</time>
-              
-            
           </span>
 
           
@@ -1642,22 +1687,6 @@
               <time title="创建时间：2018-07-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-11T00:00:00+08:00">2018-07-11</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:12:47" itemprop="dateModified" datetime="2018-11-15T16:12:47+08:00">2018-11-15</time>
-              
             
           </span>
 
@@ -1822,22 +1851,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:13:50" itemprop="dateModified" datetime="2018-11-15T16:13:50+08:00">2018-11-15</time>
-              
-            
           </span>
 
           
@@ -1938,190 +1951,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/热部署工具 JRebel ：IntelliJ IDEA 篇/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yujunyi">
-      <meta itemprop="description" content="yujunyi的博客">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yujunyi的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/05/热部署工具 JRebel ：IntelliJ IDEA 篇/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">热部署工具 JRebel ：IntelliJ IDEA 篇</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-05 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-05T00:00:00+08:00">2018-07-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:13:18" itemprop="dateModified" datetime="2018-11-15T16:13:18+08:00">2018-11-15</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>上一篇文章讲到了在 MyEclipse 下安装 JRebel ，从而实现热部署。具体原理及安装方式可以移步至 <a href="http://www.yujunyi.com/?p=297" target="_blank">热部署工具 JRebel —— MyEclipse 篇</a> 进行查看。</p>
-<p>本文介绍在 IntelliJ IDEA 下安装 JRebel 。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/05/热部署工具 JRebel ：IntelliJ IDEA 篇/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2164,7 +1998,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2232,7 +2066,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

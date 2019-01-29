@@ -120,7 +120,7 @@
 <meta property="og:image" content="https://pic.yujunyi.com/18-7-6/92078465.jpg">
 <meta property="og:image" content="https://pic.yujunyi.com/18-7-6/61788456.jpg">
 <meta property="og:image" content="https://pic.yujunyi.com/18-7-6/97803438.jpg">
-<meta property="og:updated_time" content="2018-11-15T08:13:50.741Z">
+<meta property="og:updated_time" content="2019-01-29T07:00:25.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="热部署工具 JRebel ：MyEclipse 篇">
 <meta name="twitter:description" content="热部署（Hotswap）和 JRebel热部署是在不重启 Java 虚拟机的前提下，能自动侦测到 class 文件的变化，更新运行时 class 的行为。 目前的 Java 虚拟机只能实现方法体的修改热部署，对于整个类的结构修改，仍然需要重启虚拟机，对类重新加载才能完成更新操作。对于某些大型的应用来说，每次的重启都需要花费大量的时间成本。 JRebel是一个工具，可以监控磁盘上实际已编译的 cla">
@@ -369,22 +369,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:13:50" itemprop="dateModified" datetime="2018-11-15T16:13:50+08:00">2018-11-15</time>
-              
-            
           </span>
 
           
@@ -441,12 +425,10 @@
 <h3 id="MyEclipse-安装-JRebel-过程"><a href="#MyEclipse-安装-JRebel-过程" class="headerlink" title="MyEclipse 安装 JRebel 过程"></a>MyEclipse 安装 JRebel 过程</h3><h4 id="1-JRebel-插件安装"><a href="#1-JRebel-插件安装" class="headerlink" title="1. JRebel 插件安装"></a>1. JRebel 插件安装</h4><p>点击 Help -&gt; Instal from site ，输入地址 <a href="http://update.zeroturnaround.com/update-site" target="_blank" rel="noopener">http://update.zeroturnaround.com/update-site</a> ，选择相应的版本点击下一步即可安装。</p>
 <p><img src="https://pic.yujunyi.com/18-7-6/64503423.jpg" alt="enter image description here"></p>
 <p><img src="https://pic.yujunyi.com/18-7-6/72268360.jpg" alt="enter image description here"></p>
-<h4 id="2-激活-JRebel"><a href="#2-激活-JRebel" class="headerlink" title="2. 激活 JRebel"></a>2. 激活 JRebel</h4><p>下载反向代理工具 <a href="https://pan.baidu.com/s/1UvDf8YrC2enbAsbPh0zdEA" target="_blank">https://pan.baidu.com/s/1UvDf8YrC2enbAsbPh0zdEA</a> 密码 qao3</p>
-<p>打开工具，并保持窗口，不要关闭。（该工具会拦截 JRebel 的官方激活地址，并替换成另一个地址，从而实现激活）</p>
-<p>安装完成后MyEclipse会重启，重启完成后点击 Help -&gt; JRebel -&gt; Activition 即可进入激活页面</p>
+<h4 id="2-激活-JRebel"><a href="#2-激活-JRebel" class="headerlink" title="2. 激活 JRebel"></a>2. 激活 JRebel</h4><p>安装完成后MyEclipse会重启，重启完成后点击 Help -&gt; JRebel -&gt; Activition 即可进入激活页面</p>
 <p><img src="https://pic.yujunyi.com/18-7-6/92078465.jpg" alt="enter image description here"></p>
-<p>上面地址填写 <a href="http://127.0.0.1:8888/88414687-3b91-4286-89ba-2dc813b107ce" target="_blank" rel="noopener">http://127.0.0.1:8888/88414687-3b91-4286-89ba-2dc813b107ce</a> ，下面邮箱随便填一个，就可以完成激活。</p>
-<p>激活完成后，点击 Help -&gt; JRebel -&gt; Configuration 进入设置页面，开启离线模式，完成后关闭反向代理工具。（激活时间大概为半年，失效后需要重新激活。还有一种激活方式，是上JRebel的官网，上面提供个人非商业用途的开发者免费激活，注册完成并分享到Twitter或者Facebook上就可以用了。）</p>
+<p>上面地址填写 <a href="http://idea.yujunyi.com:8081/69972f4a-2911-46eb-87ed-7bbb086e4f38" target="_blank" rel="noopener">http://idea.yujunyi.com:8081/69972f4a-2911-46eb-87ed-7bbb086e4f38</a> ，下面邮箱随便填一个，就可以完成激活。（这是我自己搭建的 JRebel License Server，有兴趣的同学可以查看 <a href="https://www.yujunyi.com/java/ide/632.html" target="_blank">JRebel 激活地址及自建 JRebel License Server</a>）</p>
+<p>激活完成后，点击 Help -&gt; JRebel -&gt; Configuration 进入设置页面，开启离线模式。（当然不开启离线模式也是可以使用的，只是为了防止 Jrebel License Server 被和谐，建议使用离线模式。离线模式有效期大概为半年，失效后需要重新激活。）</p>
 <p><img src="https://pic.yujunyi.com/18-7-6/61788456.jpg" alt="enter image description here"></p>
 <h4 id="3-启用-JRebel"><a href="#3-启用-JRebel" class="headerlink" title="3. 启用 JRebel"></a>3. 启用 JRebel</h4><p>在项目上右击，选择 Enalbe JRebel 即可对该项目启用 JRebel 。启用后，正常启动 wildfly 或 tomcat 即可实现真正的热部署。</p>
 <p><img src="https://pic.yujunyi.com/18-7-6/97803438.jpg" alt="enter image description here"></p>
@@ -562,7 +544,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -646,7 +628,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

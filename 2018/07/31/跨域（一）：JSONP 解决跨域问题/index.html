@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.``` 。12345678910111213141">
+  <meta name="description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 xxx has been blocked by CORS policy: No &amp;#39;Access-Control-Allow-Origin&amp;#39; header is present on the requested resource. 。 但是可以跨域获取文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跨域（一）：JSONP 解决跨域问题">
 <meta property="og:url" content="http://yoursite.com/2018/07/31/跨域（一）：JSONP 解决跨域问题/index.html">
 <meta property="og:site_name" content="yujunyi的博客">
-<meta property="og:description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.``` 。12345678910111213141">
+<meta property="og:description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 xxx has been blocked by CORS policy: No &amp;#39;Access-Control-Allow-Origin&amp;#39; header is present on the requested resource. 。 但是可以跨域获取文件">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://pic.yujunyi.com/18-7-31/95504587.jpg">
-<meta property="og:updated_time" content="2018-11-15T08:10:12.600Z">
+<meta property="og:updated_time" content="2018-11-29T02:47:40.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域（一）：JSONP 解决跨域问题">
-<meta name="twitter:description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.``` 。12345678910111213141">
+<meta name="twitter:description" content="跨域协议、域名、端口都相同才算同域，否则就是跨域。 浏览器为了安全考虑（同源策略），不允许 axaj 跨域获取数据。浏览器会报错 xxx has been blocked by CORS policy: No &amp;#39;Access-Control-Allow-Origin&amp;#39; header is present on the requested resource. 。 但是可以跨域获取文件">
 <meta name="twitter:image" content="https://pic.yujunyi.com/18-7-31/95504587.jpg">
 
 
@@ -365,22 +365,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-15 16:10:12" itemprop="dateModified" datetime="2018-11-15T16:10:12+08:00">2018-11-15</time>
-              
-            
           </span>
 
           
@@ -430,7 +414,15 @@
 
       
         <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p><strong>协议、域名、端口都相同才算同域，否则就是跨域。</strong></p>
-<p>浏览器为了安全考虑（<a target="_blank" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略</a>），不允许 axaj 跨域获取数据。浏览器会报错 <figure class="highlight plain"><figcaption><span>has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.``` 。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但是可以跨域获取文件内容，例如 script 标签、 img 标签可以跨域使用，利用这一点，就可以用 JSONP 进行跨域请求，解决跨域问题。</span><br><span class="line"></span><br><span class="line">### JSONP</span><br><span class="line"></span><br><span class="line">JSONP ( JSON with Padding ) 是 json 的一种&quot;使用模式&quot;，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。 </span><br><span class="line"></span><br><span class="line">JSONP 由两部分组成：回调函数+数据 。</span><br><span class="line"></span><br><span class="line">**JSONP 的原理就是动态添加一个 script 标签，而 script 标签的 src 属性是没有跨域的限制的。**</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">### 后台代码</span><br><span class="line"></span><br><span class="line">后台需要用回调函数名称包裹返回数据，这样，返回数据就作为回调函数的参数传回去了。</span><br><span class="line"></span><br><span class="line">传统方法：</span><br><span class="line"></span><br><span class="line">``` java</span><br><span class="line">@RequestMapping(&quot;/test&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public String test(String callback) &#123;</span><br><span class="line">    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(&quot;msg&quot;, &quot;hello world!&quot;);</span><br><span class="line">    return callback + &quot;(&quot; + JSON.toJSON(map) + &quot;)&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>浏览器为了安全考虑（<a target="_blank" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略</a>），不允许 axaj 跨域获取数据。浏览器会报错 <code>xxx has been blocked by CORS policy: No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource.</code> 。</p>
+<p>但是可以跨域获取文件内容，例如 script 标签、 img 标签可以跨域使用，利用这一点，就可以用 JSONP 进行跨域请求，解决跨域问题。</p>
+<h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>JSONP ( JSON with Padding ) 是 json 的一种”使用模式”，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。 </p>
+<p>JSONP 由两部分组成：回调函数+数据 。</p>
+<p><strong>JSONP 的原理就是动态添加一个 script 标签，而 script 标签的 src 属性是没有跨域的限制的。</strong></p>
+<a id="more"></a>
+<h3 id="后台代码"><a href="#后台代码" class="headerlink" title="后台代码"></a>后台代码</h3><p>后台需要用回调函数名称包裹返回数据，这样，返回数据就作为回调函数的参数传回去了。</p>
+<p>传统方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">(String callback)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">"msg"</span>, <span class="string">"hello world!"</span>);</span><br><span class="line">    <span class="keyword">return</span> callback + <span class="string">"("</span> + JSON.toJSON(map) + <span class="string">")"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>spring 4.1 后新特性 ：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">test</span><span class="params">(String callback)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">"msg"</span>, <span class="string">"hello world!"</span>);</span><br><span class="line">    MappingJacksonValue mappingJacksonValue = <span class="keyword">new</span> MappingJacksonValue(JSON.toJSON(map));</span><br><span class="line">    mappingJacksonValue.setJsonpFunction(callback);</span><br><span class="line">    <span class="keyword">return</span> mappingJacksonValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="前端调用"><a href="#前端调用" class="headerlink" title="前端调用"></a>前端调用</h3><h4 id="1-利用-script-标签调用"><a href="#1-利用-script-标签调用" class="headerlink" title="1.利用 script 标签调用"></a>1.利用 script 标签调用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">jsonpCallback</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">" src="</span>http:<span class="comment">//192.168.10.147:8080/zyjyly-1.0/dataApplication/test.do?callback=jsonpCallback"&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
@@ -488,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/26/【转】数据库两大神器【索引和锁】/" rel="next" title="【转】数据库两大神器【索引和锁】">
-                <i class="fa fa-chevron-left"></i> 【转】数据库两大神器【索引和锁】
+              <a href="/2018/07/31/跨域（二）：CORS 解决跨域问题/" rel="next" title="跨域（二）：CORS 解决跨域问题">
+                <i class="fa fa-chevron-left"></i> 跨域（二）：CORS 解决跨域问题
               </a>
             
           </div>
@@ -570,7 +562,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -634,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域"><span class="nav-number">1.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端调用"><span class="nav-number">2.</span> <span class="nav-text">前端调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-利用-script-标签调用"><span class="nav-number">2.1.</span> <span class="nav-text">1.利用 script 标签调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-jQuery-的实现（普通-ajax-方式）"><span class="nav-number">2.2.</span> <span class="nav-text">2.jQuery 的实现（普通 ajax 方式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-jQuery-的实现（-getJSON-方式）"><span class="nav-number">2.3.</span> <span class="nav-text">3.jQuery 的实现（ $.getJSON 方式）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP-的弊端："><span class="nav-number">3.</span> <span class="nav-text">JSONP 的弊端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域"><span class="nav-number">1.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-number">2.</span> <span class="nav-text">JSONP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台代码"><span class="nav-number">3.</span> <span class="nav-text">后台代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端调用"><span class="nav-number">4.</span> <span class="nav-text">前端调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-利用-script-标签调用"><span class="nav-number">4.1.</span> <span class="nav-text">1.利用 script 标签调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-jQuery-的实现（普通-ajax-方式）"><span class="nav-number">4.2.</span> <span class="nav-text">2.jQuery 的实现（普通 ajax 方式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-jQuery-的实现（-getJSON-方式）"><span class="nav-number">4.3.</span> <span class="nav-text">3.jQuery 的实现（ $.getJSON 方式）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP-的弊端："><span class="nav-number">5.</span> <span class="nav-text">JSONP 的弊端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -654,7 +646,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
