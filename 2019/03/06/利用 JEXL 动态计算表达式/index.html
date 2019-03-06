@@ -108,27 +108,26 @@
 
 
 
-  <meta name="description" content="Lombok 简介Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。官方地址：https://projectlombok.org 简单地说，Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法。">
+  <meta name="description" content="定义Java Expression Language (JEXL) 是一个表达式语言引擎，可以用来校验数据。 背景项目中，需要配置一些规则，然后根据动态的数据去验证规则。比如配置如下的规则：  人数大于5，并且名称包含 “test” 才能验证通过。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lombok">
-<meta property="og:url" content="http://yoursite.com/2018/07/11/Lombok/index.html">
+<meta property="og:title" content="利用 JEXL 动态计算表达式">
+<meta property="og:url" content="http://yoursite.com/2019/03/06/利用 JEXL 动态计算表达式/index.html">
 <meta property="og:site_name" content="yujunyi的博客">
-<meta property="og:description" content="Lombok 简介Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。官方地址：https://projectlombok.org 简单地说，Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法。">
+<meta property="og:description" content="定义Java Expression Language (JEXL) 是一个表达式语言引擎，可以用来校验数据。 背景项目中，需要配置一些规则，然后根据动态的数据去验证规则。比如配置如下的规则：  人数大于5，并且名称包含 “test” 才能验证通过。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-11/43925954.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-11/65453148.jpg">
-<meta property="og:updated_time" content="2018-11-15T08:12:47.632Z">
+<meta property="og:image" content="https://pic.yujunyi.com/19-03-06/1748001.png">
+<meta property="og:updated_time" content="2019-03-06T11:57:53.960Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lombok">
-<meta name="twitter:description" content="Lombok 简介Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。官方地址：https://projectlombok.org 简单地说，Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法。">
-<meta name="twitter:image" content="https://pic.yujunyi.com/18-7-11/43925954.jpg">
+<meta name="twitter:title" content="利用 JEXL 动态计算表达式">
+<meta name="twitter:description" content="定义Java Expression Language (JEXL) 是一个表达式语言引擎，可以用来校验数据。 背景项目中，需要配置一些规则，然后根据动态的数据去验证规则。比如配置如下的规则：  人数大于5，并且名称包含 “test” 才能验证通过。">
+<meta name="twitter:image" content="https://pic.yujunyi.com/19-03-06/1748001.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/11/Lombok/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/06/利用 JEXL 动态计算表达式/">
 
 
 
@@ -138,7 +137,7 @@
   };
 </script>
 
-  <title>Lombok | yujunyi的博客</title>
+  <title>利用 JEXL 动态计算表达式 | yujunyi的博客</title>
   
 
 
@@ -320,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/Lombok/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/利用 JEXL 动态计算表达式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yujunyi">
@@ -337,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Lombok
+          <h1 class="post-title" itemprop="name headline">利用 JEXL 动态计算表达式
               
             
           </h1>
@@ -362,7 +361,7 @@
                 
               
 
-              <time title="创建时间：2018-07-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-11T00:00:00+08:00">2018-07-11</time>
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
             
 
             
@@ -380,7 +379,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
                 
                 
@@ -414,31 +413,49 @@
       
 
       
-        <h3 id="Lombok-简介"><a href="#Lombok-简介" class="headerlink" title="Lombok 简介"></a>Lombok 简介</h3><p>Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，<strong>通过使用对应的注解，可以在编译源码的时候生成对应的方法</strong>。官方地址：<a href="https://projectlombok.org" target="_blank">https://projectlombok.org</a></p>
-<p>简单地说，<strong>Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法</strong>。</p>
+        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Java Expression Language (JEXL) 是一个表达式语言引擎，可以用来校验数据。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>项目中，需要配置一些规则，然后根据动态的数据去验证规则。比如配置如下的规则：</p>
+<p><img src="https://pic.yujunyi.com/19-03-06/1748001.png" alt=""></p>
+<p>人数大于5，并且名称包含 “test” 才能验证通过。</p>
 <a id="more"></a>
-<p>举个例子，看下面这个 class ：</p>
-<p><img src="https://pic.yujunyi.com/18-7-11/43925954.jpg" alt=""></p>
-<p>编译过后：</p>
-<p><img src="https://pic.yujunyi.com/18-7-11/65453148.jpg" alt=""></p>
-<p>通过 Lombok 自动生成了 gettser 、 setter 、 toString 、 equals 等方法，非常方便，贴别是 toString 方法， debug 的时候会很方便。</p>
-<h3 id="下载并引用"><a href="#下载并引用" class="headerlink" title="下载并引用"></a>下载并引用</h3><p>maven 项目的话直接添加依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>不是 maven 的话下载 jar 包，<a href="https://projectlombok.org/download" target="_blank">https://projectlombok.org/download</a></p>
-<h3 id="安装-IDE-插件"><a href="#安装-IDE-插件" class="headerlink" title="安装 IDE 插件"></a>安装 IDE 插件</h3><h4 id="Eclipse-MyEclipse"><a href="#Eclipse-MyEclipse" class="headerlink" title="Eclipse / MyEclipse"></a>Eclipse / MyEclipse</h4><p>官方网站下载 jar 包，<a href="https://projectlombok.org/download" target="_blank">https://projectlombok.org/download</a></p>
-<p>将 jar 包放到 Eclipse / MyEclipse 根目录，和 eclipse.ini / myeclipse.ini 同一级，打开 eclipse.ini / myeclipse.ini ，在最后输入如下内容并重启。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xbootclasspath/a:lombok.jar</span><br><span class="line">-javaagent:lombok.jar</span><br></pre></td></tr></table></figure></p>
-<h4 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h4><p>打开设置中的 Settings -&gt; Plugins ，点击 Browse repositories ，搜索 Lombok 并安装。</p>
-<h3 id="注解介绍"><a href="#注解介绍" class="headerlink" title="注解介绍"></a>注解介绍</h3><ul>
-<li>@Getter / @Setter ：用在属性上，再也不用自己手写 setter 和 getter 方法了，还可以指定访问范围。</li>
-<li>@ToString ：用在类上，可以自动覆写 toString 方法。</li>
-<li>@EqualsAndHashCode ：用在类上，自动生成 equals 方法和 hashCode 方法。</li>
-<li>@NoArgsConstructor , @RequiredArgsConstructor and @AllArgsConstructor ：用在类上，自动生成无参构造和使用所有参数的构造函数以及把所有 @NonNull 属性作为参数的构造函数，如果指定 staticName = “of” 参数，同时还会生成一个返回类对象的静态工厂方法，比使用构造函数方便很多。</li>
-<li>@Data ：注解在类上，相当于同时使用了 @ToString 、 @EqualsAndHashCode 、 @Getter 、 @Setter 和 @RequiredArgsConstrutor 这些注解，对于POJO类十分有用。</li>
-<li>@Log ：根据不同的注解生成不同类型的log对象。</li>
-<li>@Cleanup ：自动管理资源，用在局部变量之前，在当前变量范围内即将执行完毕退出之前会自动清理资源，自动生成 try-finally 这样的代码来关闭流。</li>
-</ul>
-<p>更多的介绍请查看 <a href="https://projectlombok.org/features/all" target="_blank">官方文档</a> 或者 <a href="https://blog.csdn.net/v2sking/article/details/73431364" target="_blank">https://blog.csdn.net/v2sking/article/details/73431364</a></p>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>需要注意下，开发的时候，插件和 jar 包都是需要的，不然代码会标红。</p>
-<p>maven 打包的时候，只要在 pom.xml 中引入了 Lombok ，就会自动生成相应代码，不需要 IDE 插件。</p>
+<p>按照传统的思路，一般就是写死代码，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(num &gt; <span class="number">5</span> &amp;&amp; name.contains(<span class="string">"test"</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，如果规则变成了<code>人数等于6</code>，那就要去修改代码（虽然值可以动态获取，但是 &gt; 不能动态改为 = ），比较麻烦。</p>
+<p>那么就换一种思路，做成可以配置的，按照上面的规则，就是配置成：</p>
+<blockquote>
+<p>纬度1 公式1 值1 &amp;&amp; 纬度2 公式2 值2</p>
+</blockquote>
+<p>把纬度、公式用数据字典进行替换，上图的配置内容存到库中结果就是：</p>
+<blockquote>
+<p>${num} &gt; 5 &amp;&amp; ${name}.contains(“test”)</p>
+</blockquote>
+<p>（ PS ：可能有人会有疑问，contains 需要引号和括号，怎么进行替换呢，我这边是这样处理的，公式实际存的是 <code>&gt; ${exp}</code> 和 <code>.contains(&quot;${exp}&quot;)</code> ，这时候只要替换掉 <code>${exp}</code> 就行了。）</p>
+<p>最后要验证的时候，就用实际值替换<code>${num}</code>和<code>${name}</code>就得到如下的表达式：</p>
+<blockquote>
+<p>10 &gt; 5 &amp;&amp; “test jexl”.contains(“test”)</p>
+</blockquote>
+<p>那么问题来了，怎么动态验证这个表达式的结果呢？</p>
+<h3 id="JEXL-使用示例"><a href="#JEXL-使用示例" class="headerlink" title="JEXL 使用示例"></a>JEXL 使用示例</h3><p>为了计算上面表达式的结果，这时候就需要用到 JEXL 了，我们直接看代码。</p>
+<p>首先是 pom.xml，我这边用的是 2.1.1 版本，3 版本代码有一点区别，有兴趣的可以自己研究下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-jexl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>直接上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JexlContext jc = <span class="keyword">new</span> MapContext();</span><br><span class="line">Expression e = <span class="keyword">new</span> JexlEngine().createExpression(<span class="string">"10 &gt; 5 &amp;&amp; \"test jexl\".contains(\"test\")"</span>);</span><br><span class="line">Object result = e.evaluate(jc);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
+<p>由于 <code>createExpression()</code> 需要传一个 string 参数，所以表达式中的引号需要转义下。</p>
+<p>运行结果为：true</p>
+<p>如果把表达式改为 ：</p>
+<blockquote>
+<p>1 &gt; 5 &amp;&amp; “test jexl”.contains(\”test\”)</p>
+</blockquote>
+<p>运行结果则为：false</p>
+<h3 id="JEXL-设置参数"><a href="#JEXL-设置参数" class="headerlink" title="JEXL 设置参数"></a>JEXL 设置参数</h3><p>JEXL 也可以通过设置参数来计算结果，比如公式为：</p>
+<blockquote>
+<p>x - y</p>
+</blockquote>
+<p>那么我们可以通过 JEXL 来设置 x 和 y 的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JexlContext jc = <span class="keyword">new</span> MapContext();</span><br><span class="line">jc.set(<span class="string">"x"</span>, <span class="number">10</span>);</span><br><span class="line">jc.set(<span class="string">"y"</span>, <span class="number">20</span>);</span><br><span class="line">Expression e = <span class="keyword">new</span> JexlEngine().createExpression(<span class="string">"x - y"</span>);</span><br><span class="line">Object result = e.evaluate(jc);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
+<p>运行结果为：-10</p>
+<p>这边有个容易出错的地方，<code>jc.set()</code>第二个参数为 object 类型，需要根据实际类型来传值（比如值为 string 的时候需要带引号），否则可能会报错。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>JEXL 一般被用来验证数据，以上只介绍了 JEXL 的一些基本功能，JEXL 的其它功能还有很多，有兴趣的可以深入研究。</p>
 
       
     </div>
@@ -469,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/热部署工具 JRebel ：MyEclipse 篇/" rel="next" title="热部署工具 JRebel ：MyEclipse 篇">
-                <i class="fa fa-chevron-left"></i> 热部署工具 JRebel ：MyEclipse 篇
+              <a href="/2019/01/29/JRebel 激活地址及自建 JRebel License Server/" rel="next" title="JRebel 激活地址及自建 JRebel License Server">
+                <i class="fa fa-chevron-left"></i> JRebel 激活地址及自建 JRebel License Server
               </a>
             
           </div>
@@ -478,10 +495,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/18/spring mvc 多数据源配置（一）：根据package配置不同的数据源/" rel="prev" title="spring mvc 多数据源配置（一）：根据package配置不同的数据源">
-                spring mvc 多数据源配置（一）：根据package配置不同的数据源 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -617,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lombok-简介"><span class="nav-number">1.</span> <span class="nav-text">Lombok 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并引用"><span class="nav-number">2.</span> <span class="nav-text">下载并引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-IDE-插件"><span class="nav-number">3.</span> <span class="nav-text">安装 IDE 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Eclipse-MyEclipse"><span class="nav-number">3.1.</span> <span class="nav-text">Eclipse / MyEclipse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IntelliJ-IDEA"><span class="nav-number">3.2.</span> <span class="nav-text">IntelliJ IDEA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解介绍"><span class="nav-number">4.</span> <span class="nav-text">注解介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">5.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JEXL-使用示例"><span class="nav-number">3.</span> <span class="nav-text">JEXL 使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JEXL-设置参数"><span class="nav-number">4.</span> <span class="nav-text">JEXL 设置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
