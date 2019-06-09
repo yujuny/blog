@@ -108,34 +108,27 @@
 
 
 
-  <meta name="description" content="介绍Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。 使用起来也非常简单，我们直接来看例子。">
+  <meta name="description" content="Lombok 简介Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。官方地址：https://projectlombok.org 简单地说，Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kettle 教程（三）：条件判断 Switch Case">
-<meta property="og:url" content="http://yoursite.com/2018/09/13/kettle 教程（三）：条件判断 Switch  Case/index.html">
+<meta property="og:title" content="Lombok">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/Lombok/index.html">
 <meta property="og:site_name" content="yujunyi的博客">
-<meta property="og:description" content="介绍Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。 使用起来也非常简单，我们直接来看例子。">
+<meta property="og:description" content="Lombok 简介Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。官方地址：https://projectlombok.org 简单地说，Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/1405858.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/36433302.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/41146172.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/21816278.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/90872655.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/4500047.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/96046080.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/56871528.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/42592161.jpg">
-<meta property="og:updated_time" content="2018-11-15T08:05:07.022Z">
+<meta property="og:image" content="https://pic.yujunyi.com/18-7-11/43925954.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-7-11/65453148.jpg">
+<meta property="og:updated_time" content="2019-06-09T06:29:50.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kettle 教程（三）：条件判断 Switch Case">
-<meta name="twitter:description" content="介绍Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。 使用起来也非常简单，我们直接来看例子。">
-<meta name="twitter:image" content="https://pic.yujunyi.com/18-9-13/1405858.jpg">
+<meta name="twitter:title" content="Lombok">
+<meta name="twitter:description" content="Lombok 简介Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。官方地址：https://projectlombok.org 简单地说，Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法。">
+<meta name="twitter:image" content="https://pic.yujunyi.com/18-7-11/43925954.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/13/kettle 教程（三）：条件判断 Switch  Case/">
+  <link rel="canonical" href="http://yoursite.com/2018/08/22/Lombok/">
 
 
 
@@ -145,7 +138,7 @@
   };
 </script>
 
-  <title>kettle 教程（三）：条件判断 Switch Case | yujunyi的博客</title>
+  <title>Lombok | yujunyi的博客</title>
   
 
 
@@ -327,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/kettle 教程（三）：条件判断 Switch  Case/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/22/Lombok/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yujunyi">
@@ -344,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kettle 教程（三）：条件判断 Switch Case
+          <h1 class="post-title" itemprop="name headline">Lombok
               
             
           </h1>
@@ -369,7 +362,7 @@
                 
               
 
-              <time title="创建时间：2018-09-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-13T00:00:00+08:00">2018-09-13</time>
+              <time title="创建时间：2018-08-22 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-22T00:00:00+08:00">2018-08-22</time>
             
 
             
@@ -387,7 +380,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kettle/" itemprop="url" rel="index"><span itemprop="name">kettle</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
 
                 
                 
@@ -421,32 +414,31 @@
       
 
       
-        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。</p>
-<p>使用起来也非常简单，我们直接来看例子。</p>
+        <h3 id="Lombok-简介"><a href="#Lombok-简介" class="headerlink" title="Lombok 简介"></a>Lombok 简介</h3><p>Lombok 是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，<strong>通过使用对应的注解，可以在编译源码的时候生成对应的方法</strong>。官方地址：<a href="https://projectlombok.org" target="_blank">https://projectlombok.org</a></p>
+<p>简单地说，<strong>Lombok可以通过注解，来自动生成 gettser 、 setter 、 toString 、 equals 等方法</strong>。</p>
 <a id="more"></a>
-<h3 id="场景介绍"><a href="#场景介绍" class="headerlink" title="场景介绍"></a>场景介绍</h3><p>有一个 user 表，表中数据如下：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/1405858.jpg" alt=""></p>
-<p>我们需要对 code 字段进行判断，如果不为空，则将数据同步到 user_copy 表（表结构相同）；如果 code 为空，则记录一条错误记录，错误记录表 error_info 结构如下：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/36433302.jpg" alt=""></p>
-<h3 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h3><p>整体的流程如下：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/41146172.jpg" alt=""></p>
-<p>表输入：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/21816278.jpg" alt=""></p>
-<p>Switch / Case :</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/90872655.jpg" alt=""></p>
-<p>可以看到 Switch 字段为 code，类型为 String 。如果值为空，则执行SQL，默认是插入更新。</p>
-<p>插入更新：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/4500047.jpg" alt=""></p>
-<p>执行 SQL 脚本：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/96046080.jpg" alt=""></p>
-<p>可以看到下面勾选了“执行每一行“，意思就是：前一个步骤的每一行数据都要执行一次 SQL 。如果不勾选，则意思就是：前一个步骤不管有多少条数据，只执行一次 SQL 。下面传入了一个参数 id，用来替换 SQL 中的 ？。</p>
-<p>运行结果：</p>
-<p>user_copy 表：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/56871528.jpg" alt=""></p>
-<p>error_info 表：</p>
-<p><img src="https://pic.yujunyi.com/18-9-13/42592161.jpg" alt=""></p>
-<p>可以看到，一共 10 条数据，其中 7 条 code 不为空的进入了 user_copy 表，3 条 code 为空的进了异常表。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Switch / Case 组件用于条件判断，可以根据 Case 值走不同的分支。是 kettle 中一个非常基础又重要的组件。</p>
+<p>举个例子，看下面这个 class ：</p>
+<p><img src="https://pic.yujunyi.com/18-7-11/43925954.jpg" alt=""></p>
+<p>编译过后：</p>
+<p><img src="https://pic.yujunyi.com/18-7-11/65453148.jpg" alt=""></p>
+<p>通过 Lombok 自动生成了 gettser 、 setter 、 toString 、 equals 等方法，非常方便，贴别是 toString 方法， debug 的时候会很方便。</p>
+<h3 id="下载并引用"><a href="#下载并引用" class="headerlink" title="下载并引用"></a>下载并引用</h3><p>maven 项目的话直接添加依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>不是 maven 的话下载 jar 包，<a href="https://projectlombok.org/download" target="_blank">https://projectlombok.org/download</a></p>
+<h3 id="安装-IDE-插件"><a href="#安装-IDE-插件" class="headerlink" title="安装 IDE 插件"></a>安装 IDE 插件</h3><h4 id="Eclipse-MyEclipse"><a href="#Eclipse-MyEclipse" class="headerlink" title="Eclipse / MyEclipse"></a>Eclipse / MyEclipse</h4><p>官方网站下载 jar 包，<a href="https://projectlombok.org/download" target="_blank">https://projectlombok.org/download</a></p>
+<p>将 jar 包放到 Eclipse / MyEclipse 根目录，和 eclipse.ini / myeclipse.ini 同一级，打开 eclipse.ini / myeclipse.ini ，在最后输入如下内容并重启。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xbootclasspath/a:lombok.jar</span><br><span class="line">-javaagent:lombok.jar</span><br></pre></td></tr></table></figure></p>
+<h4 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h4><p>打开设置中的 Settings -&gt; Plugins ，点击 Browse repositories ，搜索 Lombok 并安装。</p>
+<h3 id="注解介绍"><a href="#注解介绍" class="headerlink" title="注解介绍"></a>注解介绍</h3><ul>
+<li>@Getter / @Setter ：用在属性上，再也不用自己手写 setter 和 getter 方法了，还可以指定访问范围。</li>
+<li>@ToString ：用在类上，可以自动覆写 toString 方法。</li>
+<li>@EqualsAndHashCode ：用在类上，自动生成 equals 方法和 hashCode 方法。</li>
+<li>@NoArgsConstructor , @RequiredArgsConstructor and @AllArgsConstructor ：用在类上，自动生成无参构造和使用所有参数的构造函数以及把所有 @NonNull 属性作为参数的构造函数，如果指定 staticName = “of” 参数，同时还会生成一个返回类对象的静态工厂方法，比使用构造函数方便很多。</li>
+<li>@Data ：注解在类上，相当于同时使用了 @ToString 、 @EqualsAndHashCode 、 @Getter 、 @Setter 和 @RequiredArgsConstrutor 这些注解，对于POJO类十分有用。</li>
+<li>@Log ：根据不同的注解生成不同类型的log对象。</li>
+<li>@Cleanup ：自动管理资源，用在局部变量之前，在当前变量范围内即将执行完毕退出之前会自动清理资源，自动生成 try-finally 这样的代码来关闭流。</li>
+</ul>
+<p>更多的介绍请查看 <a href="https://projectlombok.org/features/all" target="_blank">官方文档</a> 或者 <a href="https://blog.csdn.net/v2sking/article/details/73431364" target="_blank">https://blog.csdn.net/v2sking/article/details/73431364</a></p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>需要注意下，开发的时候，插件和 jar 包都是需要的，不然代码会标红。</p>
+<p>maven 打包的时候，只要在 pom.xml 中引入了 Lombok ，就会自动生成相应代码，不需要 IDE 插件。</p>
 
       
     </div>
@@ -477,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/12/【转】分布式锁简单入门以及三种实现方式介绍/" rel="next" title="【转】分布式锁简单入门以及三种实现方式介绍">
-                <i class="fa fa-chevron-left"></i> 【转】分布式锁简单入门以及三种实现方式介绍
+              <a href="/2018/08/21/单例模式的破坏与改进/" rel="next" title="单例模式的破坏与改进">
+                <i class="fa fa-chevron-left"></i> 单例模式的破坏与改进
               </a>
             
           </div>
@@ -487,8 +479,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/18/kettle 教程（四）：自定义 Java 代码/" rel="prev" title="kettle 教程（四）：自定义 Java 代码">
-                kettle 教程（四）：自定义 Java 代码 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/12/MySQL 的事务隔离级别/" rel="prev" title="MySQL 的事务隔离级别">
+                MySQL 的事务隔离级别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -584,11 +576,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -625,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景介绍"><span class="nav-number">2.</span> <span class="nav-text">场景介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换"><span class="nav-number">3.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lombok-简介"><span class="nav-number">1.</span> <span class="nav-text">Lombok 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并引用"><span class="nav-number">2.</span> <span class="nav-text">下载并引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-IDE-插件"><span class="nav-number">3.</span> <span class="nav-text">安装 IDE 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Eclipse-MyEclipse"><span class="nav-number">3.1.</span> <span class="nav-text">Eclipse / MyEclipse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IntelliJ-IDEA"><span class="nav-number">3.2.</span> <span class="nav-text">IntelliJ IDEA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解介绍"><span class="nav-number">4.</span> <span class="nav-text">注解介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">5.</span> <span class="nav-text">Tips</span></a></li></ol></div>
             
 
           </div>
