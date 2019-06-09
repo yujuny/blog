@@ -108,32 +108,37 @@
 
 
 
-  <meta name="description" content="上一篇文章讲到了在 MyEclipse 下安装 JRebel ，从而实现热部署。具体原理及安装方式可以移步至 热部署工具 JRebel —— MyEclipse 篇 进行查看。 本文介绍在 IntelliJ IDEA 下安装 JRebel 。">
+  <meta name="description" content="上一篇 文章 ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。 这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。 插入更新插入更新，顾名思义，包括插入和更新两种情况。 我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="热部署工具 JRebel ：IntelliJ IDEA 篇">
-<meta property="og:url" content="http://yoursite.com/2018/07/05/热部署工具 JRebel ：IntelliJ IDEA 篇/index.html">
+<meta property="og:title" content="kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）">
+<meta property="og:url" content="http://yoursite.com/2018/08/29/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/index.html">
 <meta property="og:site_name" content="yujunyi的博客">
-<meta property="og:description" content="上一篇文章讲到了在 MyEclipse 下安装 JRebel ，从而实现热部署。具体原理及安装方式可以移步至 热部署工具 JRebel —— MyEclipse 篇 进行查看。 本文介绍在 IntelliJ IDEA 下安装 JRebel 。">
+<meta property="og:description" content="上一篇 文章 ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。 这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。 插入更新插入更新，顾名思义，包括插入和更新两种情况。 我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/16051248.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/70958973.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/31003074.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/43434832.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/77939080.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/78002400.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-7-6/77472966.jpg">
-<meta property="og:updated_time" content="2019-06-09T06:38:39.616Z">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-23/83946129.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/50963221.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/18394038.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/81368210.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/47919110.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/6523320.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/81368210.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/58934911.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/94663400.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/37041698.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/48625775.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/17622035.jpg">
+<meta property="og:updated_time" content="2019-06-09T06:46:17.225Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="热部署工具 JRebel ：IntelliJ IDEA 篇">
-<meta name="twitter:description" content="上一篇文章讲到了在 MyEclipse 下安装 JRebel ，从而实现热部署。具体原理及安装方式可以移步至 热部署工具 JRebel —— MyEclipse 篇 进行查看。 本文介绍在 IntelliJ IDEA 下安装 JRebel 。">
-<meta name="twitter:image" content="https://pic.yujunyi.com/18-7-6/16051248.jpg">
+<meta name="twitter:title" content="kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）">
+<meta name="twitter:description" content="上一篇 文章 ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。 这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。 插入更新插入更新，顾名思义，包括插入和更新两种情况。 我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等">
+<meta name="twitter:image" content="https://pic.yujunyi.com/18-8-23/83946129.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/05/热部署工具 JRebel ：IntelliJ IDEA 篇/">
+  <link rel="canonical" href="http://yoursite.com/2018/08/29/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/">
 
 
 
@@ -143,7 +148,7 @@
   };
 </script>
 
-  <title>热部署工具 JRebel ：IntelliJ IDEA 篇 | yujunyi的博客</title>
+  <title>kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本） | yujunyi的博客</title>
   
 
 
@@ -325,7 +330,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/热部署工具 JRebel ：IntelliJ IDEA 篇/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yujunyi">
@@ -342,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">热部署工具 JRebel ：IntelliJ IDEA 篇
+          <h1 class="post-title" itemprop="name headline">kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）
               
             
           </h1>
@@ -367,7 +372,7 @@
                 
               
 
-              <time title="创建时间：2018-07-05 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-05T00:00:00+08:00">2018-07-05</time>
+              <time title="创建时间：2018-08-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-29T00:00:00+08:00">2018-08-29</time>
             
 
             
@@ -385,7 +390,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kettle/" itemprop="url" rel="index"><span itemprop="name">kettle</span></a></span>
 
                 
                 
@@ -419,25 +424,54 @@
       
 
       
-        <p>上一篇文章讲到了在 MyEclipse 下安装 JRebel ，从而实现热部署。具体原理及安装方式可以移步至 <a href="http://yujunyi.com/2018/07/05/%E7%83%AD%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7%20JRebel%20%EF%BC%9AMyEclipse%20%E7%AF%87/" target="_blank">热部署工具 JRebel —— MyEclipse 篇</a> 进行查看。</p>
-<p>本文介绍在 IntelliJ IDEA 下安装 JRebel 。</p>
+        <p>上一篇 <a href="http://yujunyi.com/2018/08/23/kettle%20%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" target="_blank">文章</a> ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。</p>
+<p>这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。</p>
+<h3 id="插入更新"><a href="#插入更新" class="headerlink" title="插入更新"></a>插入更新</h3><p>插入更新，顾名思义，包括插入和更新两种情况。</p>
+<p>我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等则更新；不等则插入。</p>
 <a id="more"></a>
-<h4 id="1-JRebel-插件下载"><a href="#1-JRebel-插件下载" class="headerlink" title="1. JRebel 插件下载"></a>1. JRebel 插件下载</h4><p>下载插件 <a href="https://pan.baidu.com/s/1yYWu2hPo-2M0VXG_z-RLsA" target="_blank">https://pan.baidu.com/s/1yYWu2hPo-2M0VXG_z-RLsA</a> 密码 jm15</p>
-<h4 id="2-JRebel-插件安装"><a href="#2-JRebel-插件安装" class="headerlink" title="2. JRebel 插件安装"></a>2. JRebel 插件安装</h4><p>将插件离线安装到 idea</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/16051248.jpg" alt="enter image description here"></p>
-<p>安装完成后会重启 idea ，重启完成后可以看到设置里面多了一项 JRebel 。</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/70958973.jpg" alt="enter image description here"></p>
-<h4 id="3-激活-JRebel"><a href="#3-激活-JRebel" class="headerlink" title="3. 激活 JRebel"></a>3. 激活 JRebel</h4><p>点击 JRebel 的激活页面，输入地址 <a href="http://idea.yujunyi.com:8081/69972f4a-2911-46eb-87ed-7bbb086e4f38" target="_blank" rel="noopener">http://idea.yujunyi.com:8081/69972f4a-2911-46eb-87ed-7bbb086e4f38</a> ，下面邮箱随便填一个。（这是我自己搭建的 JRebel License Server，有兴趣的同学可以查看 <a href="https://www.yujunyi.com/java/ide/632.html" target="_blank">JRebel 激活地址及自建 JRebel License Server</a>）</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/31003074.jpg" alt="enter image description here"></p>
-<p>激活成功后，先点击 work offline ，使它离线运行。</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/43434832.jpg" alt="enter image description here"></p>
-<p>完成后，可以看到过期时间，此时就算激活成功。（当然不开启离线模式也是可以使用的，只是为了防止 Jrebel License Server 被和谐，建议使用离线模式。离线模式有效期大概为半年，失效后需要重新激活。）</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/77939080.jpg" alt="enter image description here"></p>
-<h4 id="3-启用-JRebel"><a href="#3-启用-JRebel" class="headerlink" title="3. 启用 JRebel"></a>3. 启用 JRebel</h4><p>安装完成后，可以看到 idea 工具栏上多了两个按键，点击这两个运行项目就可以启用 JRebel 了。（一个是运行，一个是调试）</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/78002400.jpg" alt="enter image description here"></p>
-<p>项目启动过程中，通过控制台可以看到已经启用了 JRebel 。</p>
-<p><img src="https://pic.yujunyi.com/18-7-6/77472966.jpg" alt="enter image description here"></p>
-<p>另外说一下，如果开启了自动部署，那么修改完代码后， JRebel 立马就会进行热部署，很方便。如果没有开启自动部署，那么需要手动按下 shift + F9 进行发布。</p>
+<p>我们再来回顾下上一篇文章中的例子。</p>
+<p>整体流程为：</p>
+<p><img src="https://pic.yujunyi.com/18-8-23/83946129.jpg" alt=""></p>
+<p>表输入的设置及预览：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/50963221.jpg" alt=""></p>
+<p>插入更新的设置：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/18394038.jpg" alt=""></p>
+<p>运行结果（user_copy 表数据）：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/81368210.jpg" alt=""></p>
+<p>运行后，user 表的数据被同步到 user_copy 表中，并且不管运行多少次，数据始终是那么多。</p>
+<p>这就是插入更新的特点，ID 一样时，只会进行更新，不会再次插入。</p>
+<h3 id="表输出"><a href="#表输出" class="headerlink" title="表输出"></a>表输出</h3><p>表输出，就是单纯地将数据输出到另一个表。</p>
+<p>我们来看这个例子。</p>
+<p>整体流程为：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/47919110.jpg" alt=""></p>
+<p>表输入和上面的例子一致。</p>
+<p>表输出的设置：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/6523320.jpg" alt=""></p>
+<p>运行结果（user_copy 表数据）：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/81368210.jpg" alt=""></p>
+<p>我们可以看到，运行结果和插入更新的一致。但是当我们第二次运行后，kettle 就会报错，说主键已经存在。</p>
+<p>这就表示表输出只能输出一次，如果目标表中已经存在相应的主键，则不会进行更新，会报错。</p>
+<p>如果我们修改下表输出的设置，我们来指定下输出字段：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/58934911.jpg" alt=""></p>
+<p>运行结果（user_copy 表数据）：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/94663400.jpg" alt=""></p>
+<p>我们可以看到，运行后 ID 由数据库自动生成，并且可以运行多次不报错，数据库也会重复插入数据。</p>
+<p>因此表输出只是单纯的输出操作。</p>
+<h3 id="执行-SQL-脚本"><a href="#执行-SQL-脚本" class="headerlink" title="执行 SQL 脚本"></a>执行 SQL 脚本</h3><p>执行 SQL 脚本，就是可以自定义一条 SQL 来执行。</p>
+<p>我们来看这个例子。</p>
+<p>整体流程为：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/37041698.jpg" alt=""></p>
+<p>表输入和上面的例子一致。</p>
+<p>执行 SQL 脚本的设置：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/48625775.jpg" alt=""></p>
+<p>运行结果（user_copy 表数据）：</p>
+<p><img src="https://pic.yujunyi.com/18-8-29/17622035.jpg" alt=""></p>
+<p>我们可以看到，每取出一条数据，就执行了一次 SQL ，将数据插入目标表。运行多次后，就会插入多次数据。</p>
+<p>执行 SQL 脚本比较灵活，我们可以用来处理较为复杂的 SQL 。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>插入更新、表输出、执行 SQL 脚本是比较常见的输出方式。</p>
+<p>插入更新由于可以更新数据，用的比较多。</p>
+<p>表输出，容易插入重复数据，请慎用。</p>
+<p>执行 SQL 脚本则比较灵活，比如我们可以用它来保存日志、错误信息等。</p>
 
       
     </div>
@@ -468,8 +502,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/热部署工具 JRebel ：MyEclipse 篇/" rel="next" title="热部署工具 JRebel ：MyEclipse 篇">
-                <i class="fa fa-chevron-left"></i> 热部署工具 JRebel ：MyEclipse 篇
+              <a href="/2018/08/23/kettle 教程（一）：简介及入门/" rel="next" title="kettle 教程（一）：简介及入门">
+                <i class="fa fa-chevron-left"></i> kettle 教程（一）：简介及入门
               </a>
             
           </div>
@@ -478,8 +512,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/11/Lombok/" rel="prev" title="Lombok">
-                Lombok <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/07/MySQL 的事务隔离级别/" rel="prev" title="MySQL 的事务隔离级别">
+                MySQL 的事务隔离级别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JRebel-插件下载"><span class="nav-number">1.</span> <span class="nav-text">1. JRebel 插件下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JRebel-插件安装"><span class="nav-number">2.</span> <span class="nav-text">2. JRebel 插件安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-激活-JRebel"><span class="nav-number">3.</span> <span class="nav-text">3. 激活 JRebel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-启用-JRebel"><span class="nav-number">4.</span> <span class="nav-text">3. 启用 JRebel</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入更新"><span class="nav-number">1.</span> <span class="nav-text">插入更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表输出"><span class="nav-number">2.</span> <span class="nav-text">表输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行-SQL-脚本"><span class="nav-number">3.</span> <span class="nav-text">执行 SQL 脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
