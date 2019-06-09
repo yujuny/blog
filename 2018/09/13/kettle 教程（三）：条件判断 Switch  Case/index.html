@@ -108,37 +108,34 @@
 
 
 
-  <meta name="description" content="上一篇 文章 ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。 这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。 插入更新插入更新，顾名思义，包括插入和更新两种情况。 我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等">
+  <meta name="description" content="介绍Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。 使用起来也非常简单，我们直接来看例子。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yujunyi的博客">
-<meta property="og:url" content="http://yoursite.com/2018/11/15/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/index.html">
+<meta property="og:title" content="kettle 教程（三）：条件判断 Switch  Case">
+<meta property="og:url" content="http://yoursite.com/2018/09/13/kettle 教程（三）：条件判断 Switch  Case/index.html">
 <meta property="og:site_name" content="yujunyi的博客">
-<meta property="og:description" content="上一篇 文章 ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。 这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。 插入更新插入更新，顾名思义，包括插入和更新两种情况。 我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等">
+<meta property="og:description" content="介绍Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。 使用起来也非常简单，我们直接来看例子。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-23/83946129.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/50963221.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/18394038.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/81368210.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/47919110.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/6523320.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/81368210.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/58934911.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/94663400.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/37041698.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/48625775.jpg">
-<meta property="og:image" content="https://pic.yujunyi.com/18-8-29/17622035.jpg">
-<meta property="og:updated_time" content="2019-06-09T06:02:48.615Z">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/1405858.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/36433302.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/41146172.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/21816278.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/90872655.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/4500047.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/96046080.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/56871528.jpg">
+<meta property="og:image" content="https://pic.yujunyi.com/18-9-13/42592161.jpg">
+<meta property="og:updated_time" content="2019-06-09T06:35:51.975Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yujunyi的博客">
-<meta name="twitter:description" content="上一篇 文章 ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。 这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。 插入更新插入更新，顾名思义，包括插入和更新两种情况。 我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等">
-<meta name="twitter:image" content="https://pic.yujunyi.com/18-8-23/83946129.jpg">
+<meta name="twitter:title" content="kettle 教程（三）：条件判断 Switch  Case">
+<meta name="twitter:description" content="介绍Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。 使用起来也非常简单，我们直接来看例子。">
+<meta name="twitter:image" content="https://pic.yujunyi.com/18-9-13/1405858.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/15/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/">
+  <link rel="canonical" href="http://yoursite.com/2018/09/13/kettle 教程（三）：条件判断 Switch  Case/">
 
 
 
@@ -148,7 +145,7 @@
   };
 </script>
 
-  <title> | yujunyi的博客</title>
+  <title>kettle 教程（三）：条件判断 Switch  Case | yujunyi的博客</title>
   
 
 
@@ -330,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/15/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/kettle 教程（三）：条件判断 Switch  Case/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yujunyi">
@@ -347,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">kettle 教程（三）：条件判断 Switch  Case
               
             
           </h1>
@@ -372,12 +369,30 @@
                 
               
 
-              <time title="创建时间：2018-11-15 16:02:08" itemprop="dateCreated datePublished" datetime="2018-11-15T16:02:08+08:00">2018-11-15</time>
+              <time title="创建时间：2018-09-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-13T00:00:00+08:00">2018-09-13</time>
             
 
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kettle/" itemprop="url" rel="index"><span itemprop="name">kettle</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -406,54 +421,32 @@
       
 
       
-        <p>上一篇 <a href="http://yujunyi.com/2018/08/23/kettle%20%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" target="_blank">文章</a> ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。</p>
-<p>这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。</p>
-<h3 id="插入更新"><a href="#插入更新" class="headerlink" title="插入更新"></a>插入更新</h3><p>插入更新，顾名思义，包括插入和更新两种情况。</p>
-<p>我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等则更新；不等则插入。</p>
+        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Switch / Case，顾名思义，类似 Java 中的 Switch / Case，用于进行条件判断。是 kettle 中一个非常常用组件。</p>
+<p>使用起来也非常简单，我们直接来看例子。</p>
 <a id="more"></a>
-<p>我们再来回顾下上一篇文章中的例子。</p>
-<p>整体流程为：</p>
-<p><img src="https://pic.yujunyi.com/18-8-23/83946129.jpg" alt=""></p>
-<p>表输入的设置及预览：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/50963221.jpg" alt=""></p>
-<p>插入更新的设置：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/18394038.jpg" alt=""></p>
-<p>运行结果（user_copy 表数据）：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/81368210.jpg" alt=""></p>
-<p>运行后，user 表的数据被同步到 user_copy 表中，并且不管运行多少次，数据始终是那么多。</p>
-<p>这就是插入更新的特点，ID 一样时，只会进行更新，不会再次插入。</p>
-<h3 id="表输出"><a href="#表输出" class="headerlink" title="表输出"></a>表输出</h3><p>表输出，就是单纯地将数据输出到另一个表。</p>
-<p>我们来看这个例子。</p>
-<p>整体流程为：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/47919110.jpg" alt=""></p>
-<p>表输入和上面的例子一致。</p>
-<p>表输出的设置：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/6523320.jpg" alt=""></p>
-<p>运行结果（user_copy 表数据）：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/81368210.jpg" alt=""></p>
-<p>我们可以看到，运行结果和插入更新的一致。但是当我们第二次运行后，kettle 就会报错，说主键已经存在。</p>
-<p>这就表示表输出只能输出一次，如果目标表中已经存在相应的主键，则不会进行更新，会报错。</p>
-<p>如果我们修改下表输出的设置，我们来指定下输出字段：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/58934911.jpg" alt=""></p>
-<p>运行结果（user_copy 表数据）：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/94663400.jpg" alt=""></p>
-<p>我们可以看到，运行后 ID 由数据库自动生成，并且可以运行多次不报错，数据库也会重复插入数据。</p>
-<p>因此表输出只是单纯的输出操作。</p>
-<h3 id="执行-SQL-脚本"><a href="#执行-SQL-脚本" class="headerlink" title="执行 SQL 脚本"></a>执行 SQL 脚本</h3><p>执行 SQL 脚本，就是可以自定义一条 SQL 来执行。</p>
-<p>我们来看这个例子。</p>
-<p>整体流程为：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/37041698.jpg" alt=""></p>
-<p>表输入和上面的例子一致。</p>
-<p>执行 SQL 脚本的设置：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/48625775.jpg" alt=""></p>
-<p>运行结果（user_copy 表数据）：</p>
-<p><img src="https://pic.yujunyi.com/18-8-29/17622035.jpg" alt=""></p>
-<p>我们可以看到，每取出一条数据，就执行了一次 SQL ，将数据插入目标表。运行多次后，就会插入多次数据。</p>
-<p>执行 SQL 脚本比较灵活，我们可以用来处理较为复杂的 SQL 。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>插入更新、表输出、执行 SQL 脚本是比较常见的输出方式。</p>
-<p>插入更新由于可以更新数据，用的比较多。</p>
-<p>表输出，容易插入重复数据，请慎用。</p>
-<p>执行 SQL 脚本则比较灵活，比如我们可以用它来保存日志、错误信息等。</p>
+<h3 id="场景介绍"><a href="#场景介绍" class="headerlink" title="场景介绍"></a>场景介绍</h3><p>有一个 user 表，表中数据如下：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/1405858.jpg" alt=""></p>
+<p>我们需要对 code 字段进行判断，如果不为空，则将数据同步到 user_copy 表（表结构相同）；如果 code 为空，则记录一条错误记录，错误记录表 error_info 结构如下：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/36433302.jpg" alt=""></p>
+<h3 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h3><p>整体的流程如下：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/41146172.jpg" alt=""></p>
+<p>表输入：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/21816278.jpg" alt=""></p>
+<p>Switch / Case :</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/90872655.jpg" alt=""></p>
+<p>可以看到 Switch 字段为 code，类型为 String 。如果值为空，则执行SQL，默认是插入更新。</p>
+<p>插入更新：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/4500047.jpg" alt=""></p>
+<p>执行 SQL 脚本：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/96046080.jpg" alt=""></p>
+<p>可以看到下面勾选了“执行每一行“，意思就是：前一个步骤的每一行数据都要执行一次 SQL 。如果不勾选，则意思就是：前一个步骤不管有多少条数据，只执行一次 SQL 。下面传入了一个参数 id，用来替换 SQL 中的 ？。</p>
+<p>运行结果：</p>
+<p>user_copy 表：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/56871528.jpg" alt=""></p>
+<p>error_info 表：</p>
+<p><img src="https://pic.yujunyi.com/18-9-13/42592161.jpg" alt=""></p>
+<p>可以看到，一共 10 条数据，其中 7 条 code 不为空的进入了 user_copy 表，3 条 code 为空的进了异常表。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Switch / Case 组件用于条件判断，可以根据 Case 值走不同的分支。是 kettle 中一个非常基础又重要的组件。</p>
 
       
     </div>
@@ -484,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/02/回溯算法/" rel="next" title="回溯算法">
-                <i class="fa fa-chevron-left"></i> 回溯算法
+              <a href="/2018/09/12/【转】分布式锁简单入门以及三种实现方式介绍/" rel="next" title="【转】分布式锁简单入门以及三种实现方式介绍">
+                <i class="fa fa-chevron-left"></i> 【转】分布式锁简单入门以及三种实现方式介绍
               </a>
             
           </div>
@@ -494,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/15/kettle 教程（三）：条件判断 Switch  Case/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/18/kettle 教程（四）：自定义 Java 代码/" rel="prev" title="kettle 教程（四）：自定义 Java 代码">
+                kettle 教程（四）：自定义 Java 代码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,7 +584,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -628,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入更新"><span class="nav-number">1.</span> <span class="nav-text">插入更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表输出"><span class="nav-number">2.</span> <span class="nav-text">表输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行-SQL-脚本"><span class="nav-number">3.</span> <span class="nav-text">执行 SQL 脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景介绍"><span class="nav-number">2.</span> <span class="nav-text">场景介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换"><span class="nav-number">3.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

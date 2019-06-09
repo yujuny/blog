@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="yujunyi的博客">
 <meta property="og:description" content="之前讲到了解决跨域的两种方式：JSONP 和 CORS ，都是需要在被调用方来修改代码解决的。 我们还可以通过代理方式，在调用方来解决跨域问题。 代理解决跨域问题代理解决跨域问题的思路是：让发送出去的请求代理成是本域的 。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-15T08:09:21.522Z">
+<meta property="og:updated_time" content="2019-06-09T06:39:01.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域（三）：代理解决跨域问题">
 <meta name="twitter:description" content="之前讲到了解决跨域的两种方式：JSONP 和 CORS ，都是需要在被调用方来修改代码解决的。 我们还可以通过代理方式，在调用方来解决跨域问题。 代理解决跨域问题代理解决跨域问题的思路是：让发送出去的请求代理成是本域的 。">
@@ -411,7 +411,7 @@
       
 
       
-        <p>之前讲到了解决跨域的两种方式：<a target="_blank" href="http://www.yujunyi.com/java/spring-mvc/466.html">JSONP</a> 和 <a target="_blank" href="http://www.yujunyi.com/java/spring-mvc/481.html">CORS</a> ，都是需要在被调用方来修改代码解决的。</p>
+        <p>之前讲到了解决跨域的两种方式：<a target="_blank" href="http://yujunyi.com/2018/07/31/%E8%B7%A8%E5%9F%9F%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AJSONP%20%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">JSONP</a> 和 <a target="_blank" href="http://yujunyi.com/2018/07/31/%E8%B7%A8%E5%9F%9F%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ACORS%20%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">CORS</a> ，都是需要在被调用方来修改代码解决的。</p>
 <p>我们还可以通过代理方式，在调用方来解决跨域问题。</p>
 <h3 id="代理解决跨域问题"><a href="#代理解决跨域问题" class="headerlink" title="代理解决跨域问题"></a>代理解决跨域问题</h3><p>代理解决跨域问题的思路是：<strong>让发送出去的请求代理成是本域的</strong> 。</p>
 <a id="more"></a>
@@ -420,7 +420,7 @@
 <p>它俩是不同域的，但我们可以在 nginx 或 Apache 上进行<strong>配置代理：将被调用方 192.168.10.2:8080 射成别的路径</strong>。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">       listen 80;</span><br><span class="line">       </span><br><span class="line">	   location /&#123;</span><br><span class="line">			proxy_pass http://192.168.10.1:8080;</span><br><span class="line">	   &#125;</span><br><span class="line">	   </span><br><span class="line">	   location /test&#123;</span><br><span class="line">			proxy_pass http://192.168.10.2:8080;</span><br><span class="line">	   &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>比如上面，nginx 运行在 192.168.10.1 上，nginx 将 192.168.10.2:8080 端口的映射成了 test ，当调用方访问 test 路径时，这样的方法在外部看起来就不像是跨域了，像是访问本地（<a href="http://192.168.10.1:8080），但实际访问别的域（http://192.168.10.2:8080）。" target="_blank" rel="noopener">http://192.168.10.1:8080），但实际访问别的域（http://192.168.10.2:8080）。</a></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上就是解决跨域的三种方式：<a target="_blank" href="http://www.yujunyi.com/java/spring-mvc/466.html">JSONP</a> 、 <a target="_blank" href="http://www.yujunyi.com/java/spring-mvc/481.html">CORS</a> 、代理。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上就是解决跨域的三种方式：<a target="_blank" href="http://yujunyi.com/2018/07/31/%E8%B7%A8%E5%9F%9F%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AJSONP%20%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">JSONP</a> 、 <a target="_blank" href="http://yujunyi.com/2018/07/31/%E8%B7%A8%E5%9F%9F%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ACORS%20%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">CORS</a> 、代理。</p>
 <p><strong>最简单的是通过 Spring 的注解就可以解决跨域的问题</strong>了，JSONP 的方式已经是很少用的了，因为存在一定的弊端。当我们无法改动被调用方代码时，可以使用代理解决跨域问题。</p>
 
       
@@ -452,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/19/spring mvc 多数据源配置（二）：利用AOP手动切换/" rel="next" title="spring mvc 多数据源配置（二）：利用AOP手动切换">
-                <i class="fa fa-chevron-left"></i> spring mvc 多数据源配置（二）：利用AOP手动切换
+              <a href="/2018/07/31/跨域（二）：CORS 解决跨域问题/" rel="next" title="跨域（二）：CORS 解决跨域问题">
+                <i class="fa fa-chevron-left"></i> 跨域（二）：CORS 解决跨域问题
               </a>
             
           </div>
@@ -559,7 +559,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
