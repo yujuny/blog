@@ -337,7 +337,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/13/IDEA 中使用 Git 和 Gerrit 提交代码时 missing changeId 的解决办法/" class="post-title-link" itemprop="http://yoursite.com/index.html">Hibernate 中对象 set 属性时自动保存入库的问题</a>
+                <a href="/2019/06/13/IDEA 中使用 Git 和 Gerrit 提交代码时 missing changeId 的解决办法/" class="post-title-link" itemprop="http://yoursite.com/index.html">IDEA 中使用 Git 和 Gerrit 提交代码时 missing changeId 的解决办法</a>
               
             
           </h1>
@@ -415,19 +415,19 @@
 
       
         
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>IDEA 下载好 Git 项目，安装好 Gerrit 插件后，提交代码时无法将代码 Push 到 Git 仓库，报 missing changeId 的错误，或者说报 rejected by remote 的错误。</p>
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>IDEA 下载好 Git 项目，安装好 Gerrit 插件后，提交代码时无法将代码 Push 到 Git 仓库，报 missing changeId 的错误，或者说报 rejected by remote 的错误。</p>
 <p>这是因为 IDEA 的插件在提交代码时不像 Eclipse 的插件那样可以填写 changeId ，所以丢失了 changeId。</p>
 <p>这里有两种解决方法，第一种是下载 commit-msg 文件，放到项目中。第二种是配置全局的 commit-msg，在下载项目时，自动在项目中生成 commit-msg 文件。</p>
 <p>commit-msg 文件下载地址：<a href="http://www.yujunyi.com/download/commit-msg" target="_blank" rel="noopener">http://www.yujunyi.com/download/commit-msg</a></p>
-<h3 id="解决方法一：拷贝-commit-msg-到每个项目中"><a href="#解决方法一：拷贝-commit-msg-到每个项目中" class="headerlink" title="解决方法一：拷贝 commit-msg 到每个项目中"></a>解决方法一：拷贝 commit-msg 到每个项目中</h3><p>下载 commit-msg 文件，并拷贝到项目下 .git\hooks 文件夹中，再次 commit &amp; push 即可。（如果之前报错，需要 reset 重新 commit &amp; push）</p>
-<h3 id="解决方法二：设置全局-commit-msg"><a href="#解决方法二：设置全局-commit-msg" class="headerlink" title="解决方法二：设置全局 commit-msg"></a>解决方法二：设置全局 commit-msg</h3><p>下载 commit-msg 文件。</p>
-<p>任意找个位置，创建 .git_template\hooks 文件夹。我这边以 C:\Users\Administrator 位置为例，在 cmd 命令行中进入该文件夹，执行 <code>mkdir .git_template\hooks</code>。当然也可以手动创建文件夹。</p>
-<p>将 commit-msg 文件拷贝到该文件夹下。</p>
-<p>最后右击任意空白处选择 Git Bash Here 打开 Git 命令运行窗口，输入以下命令<code>git config --global init.templatedir C:/Users/Administrator/.git_template</code></p>
-<p>以后再次下载项目时，就会自动在项目下 .git\hooks 文件夹中自动生成 commit-msg 文件，可以不用每次都去手动拷贝了。</p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/13/IDEA 中使用 Git 和 Gerrit 提交代码时 missing changeId 的解决办法/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>
@@ -2010,8 +2010,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
