@@ -317,6 +317,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/解决 Wildfly 启动超时（concurrent timeout）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yujunyi">
+      <meta itemprop="description" content="yujunyi的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yujunyi的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/13/解决 Wildfly 启动超时（concurrent timeout）/" class="post-title-link" itemprop="http://yoursite.com/index.html">IDEA 中设置全局 hook 解决提交代码时 missing changeId 的问题</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-13T00:00:00+08:00">2019-06-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在做项目的过程中，由于项目比较庞大，并且使用了 VPN 导致网络较差。在启动时经常报启动超时的错误，错误详情如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">16:38:04,388 ERROR [org.jboss.as.controller.management-operation] (Controller Boot Thread) WFLYCTL0348: Timeout after [300] seconds waiting for service container stability. Operation will roll back. Step that first updated the service container was &apos;add&apos; at address &apos;[</span><br><span class="line">    (&quot;core-service&quot; =&gt; &quot;management&quot;),</span><br><span class="line">    (&quot;management-interface&quot; =&gt; &quot;http-interface&quot;)</span><br><span class="line">]&apos;</span><br><span class="line">16:38:05,642 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0019: Stopped Driver service with driver-name = Aerobay.war_com.mysql.jdbc.Driver_5_1</span><br><span class="line">16:38:09,548 ERROR [org.jboss.as.controller.management-operation] (Controller Boot Thread) WFLYCTL0190: Step handler org.jboss.as.server.DeployerChainAddHandler$FinalRuntimeStepHandler@5f88823f for operation &#123;&quot;operation&quot; =&gt; &quot;add-deployer-chains&quot;,&quot;address&quot; =&gt; []&#125; at address [] failed handling operation rollback -- java.util.concurrent.TimeoutException: java.util.concurrent.TimeoutException</span><br><span class="line">    at org.jboss.as.controller.OperationContextImpl.waitForRemovals(OperationContextImpl.java:396)</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
+<p>从错误信息里面可以看出来，wildfly 在 300 秒内没有启动成功，导致 wildfly 自动停止启动。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/13/解决 Wildfly 启动超时（concurrent timeout）/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/IDEA 中设置全局 hook 解决提交代码时 missing changeId 的问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1786,171 +1950,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yujunyi">
-      <meta itemprop="description" content="yujunyi的博客">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yujunyi的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/29/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/" class="post-title-link" itemprop="http://yoursite.com/index.html">kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-29T00:00:00+08:00">2018-08-29</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/kettle/" itemprop="url" rel="index"><span itemprop="name">kettle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>上一篇 <a href="http://yujunyi.com/2018/08/23/kettle%20%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%85%A5%E9%97%A8/" target="_blank">文章</a> ，主要讲了 kettle 的原理、安装及简单的使用。其中用到了一种输出方式：插入更新。</p>
-<p>这篇文章，主要介绍下常用的输出方式：插入更新、表输出、执行 SQL 脚本。</p>
-<h3 id="插入更新"><a href="#插入更新" class="headerlink" title="插入更新"></a>插入更新</h3><p>插入更新，顾名思义，包括插入和更新两种情况。</p>
-<p>我们需要先设置一个条件，符合条件时，进行更新操作；否则，进行插入操作。常见的条件就是判断表中的 ID 和流（上一个步骤的结果，可以理解为内存）中的 ID 是否相等，相等则更新；不等则插入。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/29/kettle 教程（二）：常用输出（插入更新、表输出、执行 SQL 脚本）/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1998,7 +1997,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
