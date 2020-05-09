@@ -119,7 +119,7 @@
 <meta property="og:image" content="https://pic.yujunyi.com/20200509173144.png">
 <meta property="og:image" content="https://pic.yujunyi.com/20200509173800.png">
 <meta property="og:image" content="https://pic.yujunyi.com/20200509175019.png">
-<meta property="og:updated_time" content="2020-05-09T10:06:45.997Z">
+<meta property="og:updated_time" content="2020-05-09T10:09:48.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HeadFirst 设计模式（二）观察者模式">
 <meta name="twitter:description" content="观察者模式（Observer Pattern）在对象之间建立一对多的依赖，这样一来，当一个对象改变状态，依赖它的对象都会收到通知，并自动更新。 设计原则 找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起 针对接口编程，而不是针对实现编程 多用组合，少用继承 为了交互对象之间的松耦合设计而努力">
@@ -468,6 +468,8 @@
 <p>这里使用 notifyObservers() 方法，通知布告板，布告板收到通知后主动拉取数据。</p>
 <p>也可以改为 notifyObservers(Object arg) 方法，主动推送数据。</p>
 <p>Observalbe 类中，setChanged() 方法用于标志是否需要发送通知。（假如气象站每秒更新一次数据，而布告板只需要每小时更新一次数据，此时，可以通过 setChanged() 方法来灵活地控制通知时间）</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>为了交互对象之间的松耦合设计而努力。</p>
+<p>在对象之间建立一对多的依赖，这样一来，当一个对象改变状态，依赖它的对象都会收到通知，并自动更新。</p>
 
       
     </div>
@@ -640,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式（Observer-Pattern）"><span class="nav-number">1.</span> <span class="nav-text">观察者模式（Observer Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则"><span class="nav-number">2.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#气象观测站"><span class="nav-number">3.</span> <span class="nav-text">气象观测站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用松耦合原则重新设计"><span class="nav-number">4.</span> <span class="nav-text">利用松耦合原则重新设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-JAVA-内置的观察者模式"><span class="nav-number">5.</span> <span class="nav-text">使用 JAVA 内置的观察者模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式（Observer-Pattern）"><span class="nav-number">1.</span> <span class="nav-text">观察者模式（Observer Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计原则"><span class="nav-number">2.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#气象观测站"><span class="nav-number">3.</span> <span class="nav-text">气象观测站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用松耦合原则重新设计"><span class="nav-number">4.</span> <span class="nav-text">利用松耦合原则重新设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-JAVA-内置的观察者模式"><span class="nav-number">5.</span> <span class="nav-text">使用 JAVA 内置的观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
